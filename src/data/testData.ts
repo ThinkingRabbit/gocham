@@ -75,6 +75,21 @@ const data: Data = {
       },
       like: 45,
     },
+    {
+      poster_path:
+        'https://user-images.githubusercontent.com/76567238/221366166-16e666c2-aebe-47e8-9087-4d8ef66aff38.png',
+
+      text: '흰색 검은색? 빨리골라줘! ',
+      posting_date: '2022-02-25',
+      id: 58,
+      vote: {
+        vote_count: 1333,
+        vote_text: ['흰색', '검은색'],
+        vote_case_left: 33,
+        vote_case_right: 1300,
+      },
+      like: 52,
+    },
   ],
 };
 
