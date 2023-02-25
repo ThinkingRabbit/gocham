@@ -24,7 +24,11 @@ const VoteSection = ({
           console.log(isCustomButtonVisible);
         }}
       >
-        <p>+ 버튼 커스텀 하기</p>
+        {!isCustomButtonVisible ? (
+          <p>+ 버튼 커스텀 하기</p>
+        ) : (
+          <p>- 버튼 커스텀 하지않기</p>
+        )}
       </CustomTextButton>
       {isCustomButtonVisible ? (
         <>
