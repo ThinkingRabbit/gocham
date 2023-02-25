@@ -10,8 +10,42 @@ import {
 } from '../style/content';
 
 import Album from '../style/album.png';
+import { useEffect, useState } from 'react';
 
 function Content() {
+  // const fileInput = document.getElementById('input-file') as HTMLInputElement;
+
+  // fileInput.addEventListener('change', (event: Event) => {
+  //   const target = event.target as HTMLInputElement;
+  //   const file = target.files[0];
+
+  //   if (!file.type.startsWith('image/')) {
+  //     console.log('이미지 파일이 아닙니다.');
+  //     return;
+  //   }
+
+  //   const reader = new FileReader();
+  //   reader.onload = (event: ProgressEvent<FileReader>) => {
+  //     const img = new Image();
+  //     img.src = event.target?.result as string;
+  //     document.body.appendChild(img);
+  //   };
+  //   reader.readAsDataURL(file);
+  // });
+
+  const [files, setFiles] = useState<string>('');
+
+  const onLoadFile = (e: any) => {
+    const file = e.target.files;
+    console.log(file);
+    setFiles(file);
+  };
+
+  useEffect(() => {
+    // recoil에 이미지 업로드
+    // 이미지를 화면에 캐러셀 형식으로 나열
+  }, [files]);
+
   return (
     <WritePageWrapper>
       <Header>
@@ -41,7 +75,17 @@ function Content() {
             />
           </defs>
         </svg>
-        <img src={Album} alt='album' />
+
+        <label htmlFor='input-file'>
+          <img src={Album} alt='album' />
+        </label>
+        <input
+          style={{ display: 'none' }}
+          type='file'
+          id='input-file'
+          onChange={onLoadFile}
+          multiple
+        />
       </Header>
 
       <FunctionalBox>

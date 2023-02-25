@@ -2,19 +2,19 @@ import React, { useState } from 'react';
 import styled from '@emotion/styled';
 
 const VoteSection = () => {
-  const [isCustomButton, setIsCustomButton] = useState(false);
+  const [isCustomButtonVisible, setIsCustomButtonVisible] = useState(false);
 
   return (
     <>
       <CustomTextButton
         onClick={() => {
-          setIsCustomButton(!isCustomButton);
-          console.log(isCustomButton);
+          setIsCustomButtonVisible(!isCustomButtonVisible);
+          console.log(isCustomButtonVisible);
         }}
       >
         <p>+ 버튼 커스텀 하기</p>
       </CustomTextButton>
-      {isCustomButton ? (
+      {isCustomButtonVisible ? (
         <>
           아래의 찬성 반대 위에 여러분들이 작성해보세요!
           <br />
