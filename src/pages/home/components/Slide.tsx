@@ -5,7 +5,6 @@ import { useParams } from 'react-router-dom';
 
 function Slide(any: any) {
   const { id } = useParams();
-  console.log(typeof id);
 
   return (
     <>

@@ -108,7 +108,6 @@ License: none (public domain)
     display: block;
   }
   body {
-    line-height: 1;
   }
   ol,
   ul {
