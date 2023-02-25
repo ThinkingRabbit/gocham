@@ -1,9 +1,22 @@
-import React from 'react'
+import styled from '@emotion/styled';
+import Main from './components/Main';
 
-const index = () => {
+const Wrapper = styled.div`
+  background-color: #c49f9f;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+`;
+
+function Home() {
   return (
-    <div>index</div>
-  )
+    <Wrapper>
+      <Main></Main>
+    </Wrapper>
+  );
 }
 
-export default index
+export default Home;
