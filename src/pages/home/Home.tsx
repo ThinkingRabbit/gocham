@@ -1,8 +1,8 @@
 import styled from '@emotion/styled';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Main from './components/Main';
-import { useParams } from 'react-router-dom';
+import RandomGenerator from './utils/random';
 
 const Wrapper = styled.div`
   background-color: #c49f9f;
@@ -15,25 +15,39 @@ const Wrapper = styled.div`
 
 function Home() {
   const navigate = useNavigate();
-  const { id } = useParams();
-  let newId = +id!;
   const [scroll, setScroll] = useState(false);
+  const index = useRef(0);
+  const test = useRef<number[]>([]);
 
-  const change = () => {
+  useEffect(() => {
+    test.current = RandomGenerator.run();
+    navigate(`/shorts/${test.current[0]}`);
+  }, []);
+
+  const downChange = () => {
     setScroll(false);
-    navigate(`/shorts/${newId}`);
+    if (test.current.length - 1 > index.current) {
+      index.current += 1;
+      navigate(`/shorts/${test.current[index.current]}`);
+    }
+  };
+
+  const upChange = () => {
+    setScroll(false);
+    if (index.current > 0) {
+      index.current -= 1;
+      navigate(`/shorts/${test.current[index.current]}`);
+    }
   };
 
   useEffect(() => {
     window.addEventListener('wheel', (event: WheelEvent) => {
       if (event.deltaY > 0) {
         setScroll(true);
-        newId++;
-        return change();
+        return downChange();
       } else if (event.deltaY < 0) {
         setScroll(true);
-        newId--;
-        return change();
+        return upChange();
       }
     });
   }, [scroll]);
