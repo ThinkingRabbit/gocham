@@ -9,16 +9,18 @@ const Comment = () => {
     <S.CommentWrapper>
       <S.InfoWrapper>
         <S.WriterWrapper>
-          <img src={IUser} alt="프로필"/>
-          <S.Name>제이</S.Name>
+          <S.ImgUser src={IUser} alt="프로필"/>
+          <S.Name>디아</S.Name>
           <S.Badge></S.Badge>
         </S.WriterWrapper>
-        <div>
-          <img src={ILike} alt="좋아요"/>
-          <small>카운트</small>
-        </div>
+        <S.LikeWrapper>
+          <S.BtnLike type="button">
+            <img src={ILike} alt="좋아요"/>
+          </S.BtnLike>
+          <S.LikeCount>1,234</S.LikeCount>
+        </S.LikeWrapper>
       </S.InfoWrapper>
-      <p>내용이 작성됩니다.내용이 작성됩니다.내용이 작성됩니다.내용이 작성됩니다.내용이 작성됩니다.내용이 작성됩니다.</p>
+      <S.Comment>내용이 작성됩니다.내용이 작성됩니다.내용이 작성됩니다.내용이 작성됩니다.내용이 작성됩니다.내용이 작성됩니다.</S.Comment>
     </S.CommentWrapper>
   );
 };
