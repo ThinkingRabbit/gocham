@@ -12,27 +12,14 @@ import {
 import Album from '../style/album.png';
 import { useEffect, useState } from 'react';
 
-function Content() {
-  // const fileInput = document.getElementById('input-file') as HTMLInputElement;
+interface ContentType {
+  title: string;
+  setTitle: React.Dispatch<React.SetStateAction<string>>;
+  contents: string;
+  setContents: React.Dispatch<React.SetStateAction<string>>;
+}
 
-  // fileInput.addEventListener('change', (event: Event) => {
-  //   const target = event.target as HTMLInputElement;
-  //   const file = target.files[0];
-
-  //   if (!file.type.startsWith('image/')) {
-  //     console.log('이미지 파일이 아닙니다.');
-  //     return;
-  //   }
-
-  //   const reader = new FileReader();
-  //   reader.onload = (event: ProgressEvent<FileReader>) => {
-  //     const img = new Image();
-  //     img.src = event.target?.result as string;
-  //     document.body.appendChild(img);
-  //   };
-  //   reader.readAsDataURL(file);
-  // });
-
+function Content({ title, setTitle, contents, setContents }: ContentType) {
   const [files, setFiles] = useState<any[]>([]);
 
   const onLoadFile = (e: any) => {
@@ -103,16 +90,29 @@ function Content() {
           multiple
         />
       </Header>
-      <>
-        {files.map((data) => (
-          <SildeImg src={data} alt='' />
-        ))}
-      </>
+
+      {files.length !== 0 && (
+        <FunctionalBox style={{ height: '300px' }}>
+          <SlideBox>
+            {files.map((data) => (
+              <SildeImg src={data} alt='' />
+            ))}
+          </SlideBox>
+        </FunctionalBox>
+      )}
       <FunctionalBox>
-        <WritePageInputBox placeholder='제목을 입력해주세요' />
+        <WritePageInputBox
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          placeholder='제목을 입력해주세요'
+        />
       </FunctionalBox>
       <WritePageTextBox>
-        <Textarea placeholder='여러분들의 질문거리를 남겨주세요!' />
+        <Textarea
+          value={contents}
+          onChange={(e) => setContents(e.target.value)}
+          placeholder='여러분들의 질문거리를 남겨주세요!'
+        />
       </WritePageTextBox>
     </WritePageWrapper>
   );
@@ -120,13 +120,18 @@ function Content() {
 
 export default Content;
 
+const SlideBox = styled.div`
+  display: flex;
+  overflow-x: scroll;
+`;
+
 const SildeImg = styled.img`
-  height: 2rem;
-  width: 2rem;
+  height: 300px;
+  width: 300px;
 `;
 
 const WritePageWrapper = styled(Wrapper)`
-  height: 300px;
+  height: 600px;
 `;
 
 const WritePageInputBox = styled.input`

@@ -1,12 +1,28 @@
 import styled from '@emotion/styled';
+import { useEffect, useState } from 'react';
 import Content from './Content';
 import VoteSection from './VoteSection';
 
 function Slide() {
+  const [title, setTitle] = useState<string>('');
+  const [contents, setContents] = useState<string>('');
+  const [leftButtonCustom, setLeftButtonCustom] = useState('');
+  const [rightButtonCustom, setRightButtonCustom] = useState('');
+
   return (
     <Wrapper>
-      <Content></Content>
-      <VoteSection />
+      <Content
+        title={title}
+        setTitle={setTitle}
+        contents={contents}
+        setContents={setContents}
+      />
+      <VoteSection
+        leftButtonCustom={leftButtonCustom}
+        setLeftButtonCustom={setLeftButtonCustom}
+        rightButtonCustom={rightButtonCustom}
+        setRightButtonCustom={setRightButtonCustom}
+      />
     </Wrapper>
   );
 }

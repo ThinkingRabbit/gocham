@@ -1,7 +1,19 @@
 import React, { useState } from 'react';
 import styled from '@emotion/styled';
 
-const VoteSection = () => {
+interface ContentType {
+  leftButtonCustom: string;
+  setLeftButtonCustom: React.Dispatch<React.SetStateAction<string>>;
+  rightButtonCustom: string;
+  setRightButtonCustom: React.Dispatch<React.SetStateAction<string>>;
+}
+
+const VoteSection = ({
+  leftButtonCustom,
+  setLeftButtonCustom,
+  rightButtonCustom,
+  setRightButtonCustom,
+}: ContentType) => {
   const [isCustomButtonVisible, setIsCustomButtonVisible] = useState(false);
 
   return (
@@ -20,8 +32,18 @@ const VoteSection = () => {
           <br />
           <br />
           <VoteSectionWrap>
-            <Button maxLength={10} placeholder='찬성' />
-            <Button maxLength={10} placeholder='반대' />
+            <Button
+              maxLength={5}
+              value={leftButtonCustom}
+              onChange={(e) => setLeftButtonCustom(e.target.value)}
+              placeholder='찬성'
+            />
+            <Button
+              maxLength={5}
+              value={rightButtonCustom}
+              onChange={(e) => setRightButtonCustom(e.target.value)}
+              placeholder='반대'
+            />
           </VoteSectionWrap>
         </>
       ) : null}
