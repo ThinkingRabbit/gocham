@@ -31,12 +31,18 @@ export const Name = styled.strong`
   margin-right: 14px;
 `;
 
-export const Badge = styled.span`
+type BadgeStyle = {
+  isBlue: boolean
+}
+
+export const Badge = styled.span<BadgeStyle>`
   display: inline-block;
   border-radius: 5px;
-  width: 40px;
-  height: 20px;
-  background-color: #8BA5FF;
+  padding: 4px 6px;
+  text-align: center;
+  font-size: 12px;
+  color: #484848;
+  background-color: ${props => props.isBlue ? "#8BA5FF" : "#FF8B8B"};
 `;
 
 export const LikeWrapper = styled.div`
