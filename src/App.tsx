@@ -10,17 +10,17 @@ import {
   useRecoilState,
   useRecoilValue,
 } from 'recoil';
+import DetailPage from './pages/detailPage';
 
 function App() {
   return (
     <>
-      <RecoilRoot>
-        <Global styles={reset}></Global>
-        <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/write-page' element={<WritePage />} />
-        </Routes>
-      </RecoilRoot>
+      <Global styles={reset} />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/write-page" element={<WritePage />} />
+        <Route path="/detail-page" element={<DetailPage />} />
+      </Routes>
     </>
   );
 }
