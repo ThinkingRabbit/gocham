@@ -8,6 +8,7 @@ function Slide() {
   const [contents, setContents] = useState<string>('');
   const [leftButtonCustom, setLeftButtonCustom] = useState('');
   const [rightButtonCustom, setRightButtonCustom] = useState('');
+  const [files, setFiles] = useState<any[]>([]);
 
   return (
     <Wrapper>
@@ -16,6 +17,8 @@ function Slide() {
         setTitle={setTitle}
         contents={contents}
         setContents={setContents}
+        files={files}
+        setFiles={setFiles}
       />
       <VoteSection
         leftButtonCustom={leftButtonCustom}

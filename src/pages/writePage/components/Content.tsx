@@ -17,11 +17,18 @@ interface ContentType {
   setTitle: React.Dispatch<React.SetStateAction<string>>;
   contents: string;
   setContents: React.Dispatch<React.SetStateAction<string>>;
+  files: any;
+  setFiles: React.Dispatch<React.SetStateAction<any>>;
 }
 
-function Content({ title, setTitle, contents, setContents }: ContentType) {
-  const [files, setFiles] = useState<any[]>([]);
-
+function Content({
+  title,
+  setTitle,
+  contents,
+  setContents,
+  files,
+  setFiles,
+}: ContentType) {
   const onLoadFile = (e: any) => {
     const fileArr = e.target.files;
     // console.log(file);
@@ -94,9 +101,7 @@ function Content({ title, setTitle, contents, setContents }: ContentType) {
       {files.length !== 0 && (
         <FunctionalBox style={{ height: '300px' }}>
           <SlideBox>
-            {files.map((data) => (
-              <SildeImg src={data} alt='' />
-            ))}
+            {files && files.map((data: any) => <SildeImg src={data} alt='' />)}
           </SlideBox>
         </FunctionalBox>
       )}
@@ -123,6 +128,7 @@ export default Content;
 const SlideBox = styled.div`
   display: flex;
   overflow-x: scroll;
+  height: 300px;
 `;
 
 const SildeImg = styled.img`
@@ -145,7 +151,8 @@ const WritePageInputBox = styled.input`
 `;
 
 const WritePageTextBox = styled(TextBox)`
-  height: 100%;
+  min-height: 25%;
+  /* height: 60%; */
 `;
 
 const Textarea = styled.textarea`
