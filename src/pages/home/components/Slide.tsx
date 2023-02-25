@@ -14,7 +14,6 @@ function Slide(any: any) {
           return (
             <Wrapper key={poster.id}>
               <Content {...poster}></Content>
-
               <VoteSection>
                 <Button>{poster.vote.vote_text[0]}</Button>
                 <Button>{poster.vote.vote_text[1]}</Button>

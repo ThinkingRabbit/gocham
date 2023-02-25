@@ -12,7 +12,7 @@ export const Wrapper = styled.div`
   border-radius: 20px;
 `;
 
-export const Header = styled.div`
+export const Head = styled.div`
   height: 45px;
   background-color: #f5f5f5;
   display: flex;
