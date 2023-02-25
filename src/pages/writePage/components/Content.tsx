@@ -33,12 +33,28 @@ function Content() {
   //   reader.readAsDataURL(file);
   // });
 
-  const [files, setFiles] = useState<string>('');
+  const [files, setFiles] = useState<any[]>([]);
 
   const onLoadFile = (e: any) => {
-    const file = e.target.files;
-    console.log(file);
-    setFiles(file);
+    const fileArr = e.target.files;
+    // console.log(file);
+    // setFiles(file);
+    let fileURLs: any[] = [];
+
+    let file;
+    let filesLength = fileArr.length > 10 ? 10 : fileArr.length;
+
+    for (let i = 0; i < filesLength; i++) {
+      file = fileArr[i];
+
+      let reader = new FileReader();
+      reader.onload = () => {
+        // console.log(reader.result);
+        fileURLs[i] = reader.result;
+        setFiles([...fileURLs]);
+      };
+      reader.readAsDataURL(file);
+    }
   };
 
   useEffect(() => {
@@ -87,7 +103,11 @@ function Content() {
           multiple
         />
       </Header>
-
+      <>
+        {files.map((data) => (
+          <SildeImg src={data} alt='' />
+        ))}
+      </>
       <FunctionalBox>
         <WritePageInputBox placeholder='제목을 입력해주세요' />
       </FunctionalBox>
@@ -99,6 +119,11 @@ function Content() {
 }
 
 export default Content;
+
+const SildeImg = styled.img`
+  height: 2rem;
+  width: 2rem;
+`;
 
 const WritePageWrapper = styled(Wrapper)`
   height: 300px;
