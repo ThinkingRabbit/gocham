@@ -22,7 +22,6 @@ function Home() {
   const change = () => {
     setScroll(false);
     navigate(`/shorts/${newId}`);
-    window.scrollTo(0, 0);
   };
 
   useEffect(() => {
