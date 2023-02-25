@@ -62,8 +62,3 @@ export const VoteText = styled.span`
 
   color: #484848;
 `;
-
-export const IconBox = styled.div`
-  display: flex;
-  gap: 10px;
-`;

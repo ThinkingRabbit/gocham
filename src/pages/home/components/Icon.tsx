@@ -1,4 +1,9 @@
-import { IconBox } from '../style/content';
+import styled from '@emotion/styled';
+
+export const IconBox = styled.div`
+  display: flex;
+  gap: 10px;
+`;
 
 function Icon() {
   return (
