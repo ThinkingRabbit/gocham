@@ -7,7 +7,7 @@ import { useLocation } from 'react-router-dom';
 
 const Wrapper = styled.div`
   background-color: #c49f9f;
-  height: 104vh;
+  height: 100vh;
   width: 100vw;
   display: flex;
   justify-content: center;
@@ -28,10 +28,16 @@ function Home() {
 
   useEffect(() => {
     window.addEventListener('wheel', (event: WheelEvent) => {
+      console.log(event.deltaY);
       if (event.deltaY > 0) {
         setScroll(true);
         console.log('hi');
         newId++;
+        return change();
+      } else if (event.deltaY < 0) {
+        setScroll(true);
+        console.log('hi');
+        newId--;
         return change();
       }
     });
