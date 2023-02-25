@@ -26,7 +26,7 @@ function Main() {
   return (
     <Wrapper>
       <Top></Top>
-      <Slide></Slide>
+      <Slide> </Slide>
       <Navigation></Navigation>
     </Wrapper>
   );

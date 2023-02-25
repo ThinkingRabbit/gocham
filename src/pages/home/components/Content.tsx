@@ -8,7 +8,31 @@ import {
   VoteText,
 } from '../style/content';
 
-function Content() {
+interface Comments {
+  id: number;
+  text: string;
+  like: string;
+  case: boolean;
+}
+
+interface Vote {
+  vote_text: string[];
+  vote_count: number;
+  vote_case_left: number;
+  vote_case_right: number;
+}
+
+interface SlideData {
+  poster_path: string;
+  text: string;
+  posting_date: string;
+  id: number;
+  vote: Vote;
+  like: number;
+  comments?: Comments;
+}
+
+function Content(post: SlideData) {
   return (
     <Wrapper>
       <Header>
@@ -66,11 +90,7 @@ function Content() {
           </defs>
         </svg>
       </Header>
-      <ImgBox
-        bgphoto={
-          'https://user-images.githubusercontent.com/76567238/221348823-206633b2-52dd-40a0-b808-c42b2f85c4ad.png'
-        }
-      ></ImgBox>
+      <ImgBox bgphoto={post.poster_path}></ImgBox>
       <FunctionalBox>
         <IconBox>
           <svg
@@ -156,12 +176,9 @@ function Content() {
           </svg>
         </IconBox>
 
-        <VoteText>투표 참여 : 454</VoteText>
+        <VoteText>{`투표 참여 : ${post.vote.vote_count}`}</VoteText>
       </FunctionalBox>
-      <TextBox>
-        저 이 신발 3000만원 인데 사도 될까요? <br />
-        연봉10억이에요
-      </TextBox>
+      <TextBox>{post.text}</TextBox>
     </Wrapper>
   );
 }
