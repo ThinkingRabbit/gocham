@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { useEffect, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import Main from './components/Main';
 import RandomGenerator from './utils/random';
 
@@ -15,45 +15,51 @@ const Wrapper = styled.div`
 
 function Home() {
   const navigate = useNavigate();
-  const [scroll, setScroll] = useState(false);
+  const scroll = useRef(false);
   const index = useRef(0);
-  const test = useRef<number[]>([]);
-
-  useEffect(() => {
-    test.current = RandomGenerator.run();
-    navigate(`/shorts/${test.current[0]}`);
+  const dataIds = useRef<number[]>([]);
+  const { id } = useParams();
+  const check = useEffect(() => {
+    dataIds.current = RandomGenerator.run();
+    if (!id) {
+      console.log('no');
+      return navigate(`/shorts/${dataIds.current[0]}`);
+    }
   }, []);
 
   const downChange = () => {
-    setScroll(false);
-    if (test.current.length - 1 > index.current) {
+    if (dataIds.current.length - 1 > index.current && scroll.current) {
       index.current += 1;
-      navigate(`/shorts/${test.current[index.current]}`);
+      navigate(`/shorts/${dataIds.current[index.current]}`);
+      scroll.current = false;
     }
   };
 
   const upChange = () => {
-    setScroll(false);
-    if (index.current > 0) {
+    if (index.current > 0 && scroll.current) {
       index.current -= 1;
-      navigate(`/shorts/${test.current[index.current]}`);
+      navigate(`/shorts/${dataIds.current[index.current]}`);
+      scroll.current = false;
     }
   };
 
   useEffect(() => {
-    window.addEventListener('wheel', (event: WheelEvent) => {
+    document.addEventListener('wheel', (event: WheelEvent) => {
       if (event.deltaY > 0) {
-        setScroll(true);
         return downChange();
-      } else if (event.deltaY < 0) {
-        setScroll(true);
+      }
+      if (event.deltaY < 0) {
         return upChange();
       }
     });
-  }, [scroll]);
+  }, [scroll.current]);
+
+  const onWheel = () => {
+    scroll.current = true;
+  };
 
   return (
-    <Wrapper>
+    <Wrapper onWheel={onWheel}>
       <Main />
     </Wrapper>
   );

@@ -8,5 +8,5 @@ export type CommentType = {
   like: {
     isLiked: boolean;
     likeCount: number;
-  }
-}
+  };
+};

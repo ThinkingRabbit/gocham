@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from '@emotion/styled';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { MdArrowBackIos } from 'react-icons/md';
 import { RxHamburgerMenu } from 'react-icons/rx';
 import { FaRegThumbsUp } from 'react-icons/fa';
@@ -12,7 +12,13 @@ import Comment from './components/Comment/Comment';
 const Index = () => {
   const navigate = useNavigate();
 
+  const location = useLocation();
+
   const [isLiked, setisLiked] = useState<boolean>(false);
+
+  const [isCopied, setisCopied] = useState<boolean>(false);
+
+  const { url, image, voteCount, description } = location.state;
 
   const handleLikeClick = () => {
     setisLiked(true);
@@ -24,6 +30,11 @@ const Index = () => {
 
   const likeHandler = () => {
     isLiked ? handleUnlikeClick() : handleLikeClick();
+  };
+
+  const handleCopyUrlClick = () => {
+    setisCopied(true);
+    navigator.clipboard.writeText(url);
   };
 
   const pageHandler = () => {
@@ -52,15 +63,15 @@ const Index = () => {
           <StMenuIcon />
         </StHeader>
         <StBody>
-          <Carousel />
+          <Carousel image={image} />
           <StSocial>
             <StIconBox>
               <StLike isLiked={isLiked} onClick={likeHandler} />
-              <StShare />
+              <StShare isCopied={isCopied} onClick={handleCopyUrlClick} />
             </StIconBox>
-            <StParcitipation>투표 참여 : 453</StParcitipation>
+            <StParcitipation>투표 참여 : {voteCount}</StParcitipation>
           </StSocial>
-          <StInfo>저 이 신발 3000만원인데 사도 될까요? 연봉 10억이에요.</StInfo>
+          <StInfo>{description}</StInfo>
         </StBody>
         <StFooter>
           <Comment {...comment} />
@@ -141,9 +152,10 @@ const StLike = styled(FaRegThumbsUp)<{ isLiked: boolean }>`
   cursor: pointer;
 `;
 
-const StShare = styled(RiSendPlaneLine)`
+const StShare = styled(RiSendPlaneLine)<{ isCopied: boolean }>`
   width: 26px;
   height: 26px;
+  color: ${({ isCopied }) => (isCopied ? 'blue' : 'black')};
   cursor: pointer;
 `;
 

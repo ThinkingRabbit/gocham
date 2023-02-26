@@ -27,6 +27,7 @@ export const ImgBox = styled.div<{ bgphoto: string }>`
   background-position: center;
   width: 100%;
   height: 312px;
+  cursor: pointer;
 `;
 
 export const FunctionalBox = styled.div`
