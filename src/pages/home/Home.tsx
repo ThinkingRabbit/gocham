@@ -1,6 +1,8 @@
 import styled from '@emotion/styled';
 import { useEffect, useRef, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useRecoilState } from 'recoil';
+import { testData } from '../../states/testData';
 import Main from './components/Main';
 import RandomGenerator from './utils/random';
 
@@ -19,13 +21,13 @@ function Home() {
   const index = useRef(0);
   const dataIds = useRef<number[]>([]);
   const { id } = useParams();
-  const check = useEffect(() => {
-    dataIds.current = RandomGenerator.run();
+  const [inputData, setInputData] = useRecoilState(testData);
+  useEffect(() => {
+    dataIds.current = RandomGenerator.run(inputData);
     if (!id) {
-      console.log('no');
       return navigate(`/shorts/${dataIds.current[0]}`);
     }
-  }, []);
+  }, [inputData]);
 
   const downChange = () => {
     if (dataIds.current.length - 1 > index.current && scroll.current) {
