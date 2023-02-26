@@ -16,6 +16,8 @@ import {
   newWritLeftButtonCustom,
 } from '../states/newWriteState';
 import { useRecoilState } from 'recoil';
+import { updateData } from '../data/testData';
+import { SlideData } from '../pages/home/type';
 
 const NavigationBar = styled.div`
   margin: 0 10px 0 10px;
@@ -70,9 +72,9 @@ function Navbar() {
     if (title !== '') {
       const leftValue = leftButtonCustom ? leftButtonCustom : '찬성';
       const rightValue = rightButtonCustom ? rightButtonCustom : '반대';
-      const saveData = {
-        poster_path: files,
+      const saveData: SlideData = {
         text: contents,
+        poster_path: files,
         posting_date: '2022-02-27',
         id: 58,
         vote: {
@@ -83,12 +85,13 @@ function Navbar() {
         },
         like: 0,
       };
+      updateData(saveData);
       console.log(saveData);
       setTitle('');
       setContents('');
       setLeftButtonCustom('');
       setRightButtonCustom('');
-      setFiles([]);
+      setFiles('');
     }
   }, [location]);
 

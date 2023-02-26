@@ -22,7 +22,7 @@ export const newWriteRightButtonCustom = atom({
 
 export const newWriteFiles = atom({
   key: 'newWriteFiles',
-  default: [],
+  default: '',
 });
 
 export const newWriteSave = atom({
