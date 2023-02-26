@@ -1,5 +1,4 @@
 import styled from '@emotion/styled';
-import { sign } from 'crypto';
 import React, { useState } from 'react';
 import { RxEyeOpen, RxEyeClosed } from 'react-icons/rx';
 import { useNavigate } from 'react-router-dom';
@@ -7,9 +6,10 @@ import { useNavigate } from 'react-router-dom';
 interface IProps {
   id: string;
   password: string;
+  passwordCheck: string;
 }
 
-const Login = () => {
+const SignUp = () => {
   const navigate = useNavigate();
 
   const [isVisible, setisVisible] = useState<boolean>(false);
@@ -17,15 +17,10 @@ const Login = () => {
   const [userInfo, setUserInfo] = useState<IProps>({
     id: '',
     password: '',
+    passwordCheck: '',
   });
 
-  const { id, password } = userInfo;
-
-  const signupInfo = localStorage.getItem('userInfo');
-
-  const isValid = JSON.stringify(userInfo) === signupInfo;
-
-  const canSubmit = id !== '' && password !== '';
+  const { id, password, passwordCheck } = userInfo;
 
   const visibleHandler = () => {
     setisVisible(!isVisible);
@@ -36,36 +31,55 @@ const Login = () => {
     setUserInfo({ ...userInfo, [name]: value });
   };
 
+  const canSubmit: boolean =
+    id !== '' && password !== '' && passwordCheck !== '';
+
+  const isValid: boolean = password === passwordCheck;
+
   const submit = () => {
     if (!canSubmit) {
-      return window.alert('아이디, 비밀번호를 모두 입력해주세요');
+      return window.alert(
+        '아이디, 비밀번호, 비밀번호 확인 칸을 모두 입력해주세요'
+      );
     }
 
     if (!isValid) {
-      return window.alert('아이디, 비밀번호를 확인해주세요');
+      return window.alert('비밀번호가 일치하지 않습니다');
     }
 
-    localStorage.setItem('isLogin', 'true');
+    localStorage.setItem(
+      'userInfo',
+      JSON.stringify({ id: id, password: password })
+    );
 
-    navigate('/');
+    window.alert('회원가입이 완료되었습니다');
+
+    navigate('/login');
   };
 
   return (
     <StWrapper>
-      <StLogin>
-        <StHeader>Login</StHeader>
+      <StSignUp>
+        <StHeader>SignUp</StHeader>
         <StBody>
           <StInput
+            placeholder="아이디를 입력해주세요"
             value={id}
             name="id"
-            placeholder="아이디"
             onChange={userInfoHandler}
           />
           <StInput
+            placeholder="비밀번호를 입력해주세요"
+            type={isVisible ? 'text' : 'password'}
             value={password}
             name="password"
+            onChange={userInfoHandler}
+          />
+          <StInput
+            placeholder="비밀번호를 한 번 더 확인해주세요"
             type={isVisible ? 'text' : 'password'}
-            placeholder="비밀번호"
+            value={passwordCheck}
+            name="passwordCheck"
             onChange={userInfoHandler}
           />
           {isVisible ? (
@@ -74,17 +88,8 @@ const Login = () => {
             <StClosed onClick={visibleHandler} />
           )}
         </StBody>
-        <StFooter>
-          <StButton
-            onClick={() => {
-              navigate('/signup');
-            }}
-          >
-            회원가입
-          </StButton>
-          <StButton onClick={submit}>로그인</StButton>
-        </StFooter>
-      </StLogin>
+        <StFooter onClick={submit}>완료</StFooter>
+      </StSignUp>
     </StWrapper>
   );
 };
@@ -99,7 +104,7 @@ const StWrapper = styled.div`
   box-sizing: border-box;
 `;
 
-const StLogin = styled.div`
+const StSignUp = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -146,17 +151,10 @@ const StClosed = styled(RxEyeClosed)`
   cursor: pointer;
 `;
 
-const StFooter = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+const StFooter = styled.button`
   margin-top: 30px;
   width: 62%;
+  height: 35px;
 `;
 
-const StButton = styled.button`
-  width: 40%;
-  height: 30px;
-`;
-
-export default Login;
+export default SignUp;
