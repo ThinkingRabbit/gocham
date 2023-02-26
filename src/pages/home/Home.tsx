@@ -6,7 +6,6 @@ const Wrapper = styled.div`
   height: 100vh;
   width: 100vw;
   display: flex;
-
   justify-content: center;
   align-items: center;
 `;
@@ -14,7 +13,7 @@ const Wrapper = styled.div`
 function Home() {
   return (
     <Wrapper>
-      <Main></Main>
+      <Main />
     </Wrapper>
   );
 }

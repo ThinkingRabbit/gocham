@@ -6,7 +6,6 @@ export const Wrapper = styled.div`
   flex-direction: column;
   width: 100%;
   height: 516px;
-
   background: #f5f5f5;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 20px;
@@ -23,7 +22,7 @@ export const Header = styled.div`
 `;
 
 export const ImgBox = styled.div<{ bgphoto: string }>`
-  background-image: url(${(props) => props.bgphoto});
+  background-image: url(${props => props.bgphoto});
   background-size: cover;
   background-position: center;
   width: 100%;
@@ -59,7 +58,6 @@ export const VoteText = styled.span`
   font-size: 14px;
   line-height: 17px;
   /* identical to box height */
-
   color: #484848;
 `;
 

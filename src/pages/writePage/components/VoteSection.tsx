@@ -39,14 +39,14 @@ const VoteSection = ({
             <Button
               maxLength={5}
               value={leftButtonCustom}
-              onChange={(e) => setLeftButtonCustom(e.target.value)}
-              placeholder='찬성'
+              onChange={e => setLeftButtonCustom(e.target.value)}
+              placeholder="찬성"
             />
             <Button
               maxLength={5}
               value={rightButtonCustom}
-              onChange={(e) => setRightButtonCustom(e.target.value)}
-              placeholder='반대'
+              onChange={e => setRightButtonCustom(e.target.value)}
+              placeholder="반대"
             />
           </VoteSectionWrap>
         </>

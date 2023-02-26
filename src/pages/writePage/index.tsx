@@ -14,7 +14,7 @@ const Wrapper = styled.div`
 function Home() {
   return (
     <Wrapper>
-      <Main></Main>
+      <Main />
     </Wrapper>
   );
 }

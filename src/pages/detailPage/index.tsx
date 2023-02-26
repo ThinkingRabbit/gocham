@@ -1,36 +1,51 @@
+import React, { useState } from 'react';
 import styled from '@emotion/styled';
-import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { MdArrowBackIos } from 'react-icons/md';
+import { RxHamburgerMenu } from 'react-icons/rx';
+import { FaRegThumbsUp } from 'react-icons/fa';
+import { RiSendPlaneLine } from 'react-icons/ri';
+import Carousel from './components/Carousel/Carousel';
 import Comment from './components/Comment/Comment';
-import Slider from 'react-slick';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
 
 const Index = () => {
-  const settings = {
-    dots: false,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
+  const navigate = useNavigate();
+
+  const [isLiked, setisLiked] = useState<boolean>(false);
+
+  const handleLikeClick = () => {
+    setisLiked(true);
   };
 
-  const images = [
-    'https://avatars.githubusercontent.com/u/126273825?s=64&v=4',
-    'https://avatars.githubusercontent.com/u/126273825?s=64&v=4',
-    'https://avatars.githubusercontent.com/u/126273825?s=64&v=4',
-    'https://avatars.githubusercontent.com/u/126273825?s=64&v=4',
-  ];
+  const handleUnlikeClick = () => {
+    setisLiked(false);
+  };
+
+  const likeHandler = () => {
+    isLiked ? handleUnlikeClick() : handleLikeClick();
+  };
+
+  const pageHandler = () => {
+    navigate('/');
+  };
 
   return (
     <StWrapper>
       <StDetail>
-        <StHeader />
+        <StHeader>
+          <StBackIcon onClick={pageHandler} />
+          <StMenuIcon />
+        </StHeader>
         <StBody>
-          <StSlider {...settings}>
-            {images.map((cur, idx) => (
-              <img src={cur} key={idx} alt="이미지" />
-            ))}
-          </StSlider>
+          <Carousel />
+          <StSocial>
+            <StIconBox>
+              <StLike isLiked={isLiked} onClick={likeHandler} />
+              <StShare />
+            </StIconBox>
+            <StParcitipation>투표 참여 : 453</StParcitipation>
+          </StSocial>
+          <StInfo>저 이 신발 3000만원인데 사도 될까요? 연봉 10억이에요.</StInfo>
         </StBody>
         <StFooter>
           <Comment />
@@ -49,31 +64,84 @@ const StWrapper = styled.div`
   background: #c49f9f;
 `;
 
-const StSlider = styled(Slider)`
-  position: relative;
-  height: 400px;
-  width: 400px;
-  .slick-prev::before,
-  .slick-next::before {
-    opacity: 0;
-    display: none;
-  }
-`;
-
 const StDetail = styled.div`
+  position: relative;
   width: 470px;
   height: 790px;
   background: white;
 `;
 
 const StHeader = styled.div`
+  position: absolute;
+  top: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   width: 100%;
-  height: 50px;
-  border: 1px solid black;
+  z-index: 1;
+`;
+
+const StBackIcon = styled(MdArrowBackIos)`
+  margin-top: 50px;
+  margin-left: 15px;
+  color: white;
+  font-size: 30px;
+  cursor: pointer;
+`;
+
+const StMenuIcon = styled(RxHamburgerMenu)`
+  margin-top: 50px;
+  margin-right: 15px;
+  color: white;
+  font-size: 30px;
+  cursor: pointer;
 `;
 
 const StBody = styled.div`
   width: 100%;
+`;
+
+const StSocial = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px;
+  width: 100%;
+  height: 50px;
+  box-sizing: border-box;
+`;
+
+const StIconBox = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+`;
+
+const StLike = styled(FaRegThumbsUp)<{ isLiked: boolean }>`
+  margin-right: 10px;
+  width: 24px;
+  height: 24px;
+  color: ${({ isLiked }) => (isLiked ? 'blue' : 'black')};
+  cursor: pointer;
+`;
+
+const StShare = styled(RiSendPlaneLine)`
+  width: 26px;
+  height: 26px;
+  cursor: pointer;
+`;
+
+const StParcitipation = styled.p`
+  width: 100%;
+  text-align: right;
+`;
+
+const StInfo = styled.div`
+  padding: 10px;
+  width: 100%;
+  border-top: 1px solid #ccc;
+  box-sizing: border-box;
 `;
 
 const StFooter = styled.div`

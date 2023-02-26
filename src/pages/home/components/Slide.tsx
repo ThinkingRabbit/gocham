@@ -48,7 +48,7 @@ function Slide() {
 
   return (
     <Wrapper>
-      <Content></Content>
+      <Content />
       <VoteSection>
         <Button>찬성</Button>
         <Button>반대</Button>
