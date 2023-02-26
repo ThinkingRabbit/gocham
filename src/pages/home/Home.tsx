@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { useEffect, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Main from './components/Main';
 import RandomGenerator from './utils/random';
 
@@ -18,10 +18,13 @@ function Home() {
   const [scroll, setScroll] = useState(false);
   const index = useRef(0);
   const test = useRef<number[]>([]);
+  const { id } = useParams();
 
   useEffect(() => {
     test.current = RandomGenerator.run();
-    navigate(`/shorts/${test.current[0]}`);
+    if (!id) {
+      return navigate(`/shorts/${test.current[0]}`);
+    }
   }, []);
 
   const downChange = () => {
@@ -41,7 +44,7 @@ function Home() {
   };
 
   useEffect(() => {
-    window.addEventListener('wheel', (event: WheelEvent) => {
+    document.addEventListener('wheel', (event: WheelEvent) => {
       if (event.deltaY > 0) {
         setScroll(true);
         return downChange();
