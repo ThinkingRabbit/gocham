@@ -1,5 +1,8 @@
 import styled from '@emotion/styled';
-import Slide from './Slide';
+import WritePage from './WritePage';
+import Headers from '../../../components/Header';
+import Navbar from '../../../components/Navbar';
+import { useEffect } from 'react';
 
 const Wrapper = styled.div`
   background-color: white;
@@ -10,24 +13,12 @@ const Wrapper = styled.div`
   height: 88vh;
 `;
 
-const Top = styled.div`
-  background-color: wheat;
-  height: 60px;
-  width: 100%;
-`;
-
-const Navigation = styled.div`
-  background-color: wheat;
-  height: 60px;
-  width: 100%;
-`;
-
 function Main() {
   return (
     <Wrapper>
-      <Top></Top>
-      <Slide></Slide>
-      <Navigation></Navigation>
+      <Headers />
+      <WritePage />
+      <Navbar />
     </Wrapper>
   );
 }

@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { useDidUnMountEffect } from '../../../utils/tools';
 import Content from './Content';
 import VoteSection from './VoteSection';
 
@@ -9,6 +10,14 @@ function Slide() {
   const [leftButtonCustom, setLeftButtonCustom] = useState('');
   const [rightButtonCustom, setRightButtonCustom] = useState('');
   const [files, setFiles] = useState<any[]>([]);
+
+  useEffect(() => {
+    console.log(title);
+  }, [title]);
+
+  useDidUnMountEffect(() => {
+    console.log('저장할 값:');
+  }, []);
 
   return (
     <Wrapper>
