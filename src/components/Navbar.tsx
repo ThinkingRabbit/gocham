@@ -7,6 +7,15 @@ import checkImg from '../assets/images/icons/checkImg.png';
 import trophyImg from '../assets/images/icons/trophy.png';
 import { Link, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import {
+  newWriteContent,
+  newWriteFiles,
+  newWriteRightButtonCustom,
+  newWriteSave,
+  newWriteTitle,
+  newWritLeftButtonCustom,
+} from '../states/newWriteState';
+import { useRecoilState } from 'recoil';
 
 const NavigationBar = styled.div`
   margin: 0 10px 0 10px;
@@ -42,13 +51,48 @@ const Plus = styled.li`
 
 function Navbar() {
   const location = useLocation();
-  const [isWritePage, setIsWritePage] = useState(false);
+  const [isWritePage, setIsWritePage] = useRecoilState(newWriteSave);
+  const [title, setTitle] = useRecoilState(newWriteTitle);
+  const [contents, setContents] = useRecoilState(newWriteContent);
+  const [leftButtonCustom, setLeftButtonCustom] = useRecoilState(
+    newWritLeftButtonCustom
+  );
+  const [rightButtonCustom, setRightButtonCustom] = useRecoilState(
+    newWriteRightButtonCustom
+  );
+  const [files, setFiles] = useRecoilState(newWriteFiles);
 
   useEffect(() => {
     location.pathname == '/write-page'
       ? setIsWritePage(true)
       : setIsWritePage(false);
+
+    if (title !== '') {
+      const leftValue = leftButtonCustom ? leftButtonCustom : '찬성';
+      const rightValue = rightButtonCustom ? rightButtonCustom : '반대';
+      const saveData = {
+        poster_path: files,
+        text: contents,
+        posting_date: '2022-02-27',
+        id: 58,
+        vote: {
+          vote_text: [leftValue, rightValue],
+          vote_count: 0,
+          vote_case_left: 0,
+          vote_case_right: 0,
+        },
+        like: 0,
+      };
+      console.log(saveData);
+      setTitle('');
+      setContents('');
+      setLeftButtonCustom('');
+      setRightButtonCustom('');
+      setFiles([]);
+    }
   }, [location]);
+
+  useEffect(() => {}, [isWritePage]);
 
   return (
     <NavigationBar>

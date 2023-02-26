@@ -21,7 +21,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />}></Route>
           <Route path="/shorts/:id" element={<Home />} />
-          <Route path="/writezw-page" element={<WritePage />} />
+          <Route path="/write-page" element={<WritePage />} />
           <Route path="/detail-page" element={<DetailPage />} />
         </Routes>
       </RecoilRoot>

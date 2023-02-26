@@ -2,7 +2,9 @@ import styled from '@emotion/styled';
 import WritePage from './WritePage';
 import Headers from '../../../components/Header';
 import Navbar from '../../../components/Navbar';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { useRecoilValue } from 'recoil';
+import { newWriteTitle } from '../../../states/newWriteState';
 
 const Wrapper = styled.div`
   background-color: white;
@@ -14,6 +16,17 @@ const Wrapper = styled.div`
 `;
 
 function Main() {
+  // const names = useRecoilValue(newWriteTitle);
+
+  // const [onSave, setOnSave] = useState(false);
+  // useEffect(() => {
+  //   return () => {
+  //     if (true) {
+  //       console.log(names);
+  //     }
+  //   };
+  // }, []);
+
   return (
     <Wrapper>
       <Headers />
