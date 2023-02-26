@@ -3,7 +3,22 @@ import plusImg from '../assets/images/icons/plus.png';
 import searchImg from '../assets/images/icons/search.png';
 import userImg from '../assets/images/icons/user.png';
 import homeImg from '../assets/images/icons/home.png';
+import checkImg from '../assets/images/icons/checkImg.png';
 import trophyImg from '../assets/images/icons/trophy.png';
+import { Link, useLocation } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import {
+  newWriteContent,
+  newWriteFiles,
+  newWriteRightButtonCustom,
+  newWriteSave,
+  newWriteTitle,
+  newWritLeftButtonCustom,
+} from '../states/newWriteState';
+import { useRecoilState } from 'recoil';
+import { updateData } from '../data/testData';
+import { lastIdx, testData } from '../states/testData';
+import { Data, SlideData } from '../pages/home/type';
 
 const NavigationBar = styled.div`
   margin: 0 10px 0 10px;
@@ -38,6 +53,55 @@ const Plus = styled.li`
 `;
 
 function Navbar() {
+  const location = useLocation();
+  const [isWritePage, setIsWritePage] = useRecoilState(newWriteSave);
+  const [title, setTitle] = useRecoilState(newWriteTitle);
+  const [contents, setContents] = useRecoilState(newWriteContent);
+  const [leftButtonCustom, setLeftButtonCustom] = useRecoilState(
+    newWritLeftButtonCustom
+  );
+  const [rightButtonCustom, setRightButtonCustom] = useRecoilState(
+    newWriteRightButtonCustom
+  );
+  const [files, setFiles] = useRecoilState(newWriteFiles);
+  const [inputData, setInputData] = useRecoilState(testData);
+  const [idx, setIdx] = useRecoilState(lastIdx);
+
+  useEffect(() => {
+    location.pathname === '/write-page'
+      ? setIsWritePage(true)
+      : setIsWritePage(false);
+
+    if (title !== '') {
+      const leftValue = leftButtonCustom ? leftButtonCustom : '찬성';
+      const rightValue = rightButtonCustom ? rightButtonCustom : '반대';
+      const saveData: SlideData = {
+        poster_path:
+          'https://user-images.githubusercontent.com/76567238/221376420-ee96140e-170c-4357-996b-9c7fcf9252e0.png',
+        text: contents,
+        posting_date: '2022-02-27',
+        id: idx,
+        vote: {
+          vote_text: [leftValue, rightValue],
+          vote_count: 0,
+          vote_case_left: 0,
+          vote_case_right: 0,
+        },
+        like: 0,
+      };
+      setIdx(value => value + 1);
+      setInputData({
+        result: [...inputData.result, saveData],
+      });
+
+      setTitle('');
+      setContents('');
+      setLeftButtonCustom('');
+      setRightButtonCustom('');
+      setFiles('');
+    }
+  }, [location]);
+
   return (
     <NavigationBar>
       <MenuList>
@@ -48,7 +112,15 @@ function Navbar() {
           <img alt="메뉴2" src={homeImg} />
         </Menu>
         <Plus>
-          <img alt="메뉴3" src={plusImg} />
+          {isWritePage ? (
+            <Link to={`/shorts/${idx}`}>
+              <img src={checkImg} />
+            </Link>
+          ) : (
+            <Link to="/write-page">
+              <img src={plusImg} />
+            </Link>
+          )}
         </Plus>
         <Menu>
           <img alt="" src={searchImg} />

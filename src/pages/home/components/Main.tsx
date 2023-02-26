@@ -15,9 +15,9 @@ const Wrapper = styled.div`
 function Main() {
   return (
     <Wrapper>
-      <Headers></Headers>
-      <Slide></Slide>
-      <Navbar></Navbar>
+      <Headers />
+      <Slide />
+      <Navbar />
     </Wrapper>
   );
 }

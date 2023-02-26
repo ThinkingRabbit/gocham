@@ -1,14 +1,29 @@
 import styled from '@emotion/styled';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { useRecoilState } from 'recoil';
+import {
+  newWriteContent,
+  newWriteFiles,
+  newWriteRightButtonCustom,
+  newWriteSave,
+  newWriteTitle,
+  newWritLeftButtonCustom,
+} from '../../../states/newWriteState';
+import { useDidUnMountEffect } from '../../../utils/tools';
 import Content from './Content';
 import VoteSection from './VoteSection';
 
-function Slide() {
-  const [title, setTitle] = useState<string>('');
-  const [contents, setContents] = useState<string>('');
-  const [leftButtonCustom, setLeftButtonCustom] = useState('');
-  const [rightButtonCustom, setRightButtonCustom] = useState('');
-  const [files, setFiles] = useState<any[]>([]);
+function WritePage() {
+  const [isWritePage, setIsWritePage] = useRecoilState(newWriteSave);
+  const [title, setTitle] = useRecoilState(newWriteTitle);
+  const [contents, setContents] = useRecoilState(newWriteContent);
+  const [leftButtonCustom, setLeftButtonCustom] = useRecoilState(
+    newWritLeftButtonCustom
+  );
+  const [rightButtonCustom, setRightButtonCustom] = useRecoilState(
+    newWriteRightButtonCustom
+  );
+  const [files, setFiles] = useRecoilState(newWriteFiles);
 
   return (
     <Wrapper>
@@ -30,7 +45,7 @@ function Slide() {
   );
 }
 
-export default Slide;
+export default WritePage;
 
 const Wrapper = styled.div`
   background-color: white;

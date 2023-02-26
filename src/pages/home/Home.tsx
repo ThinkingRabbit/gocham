@@ -1,13 +1,17 @@
 import styled from '@emotion/styled';
+
 import { useEffect, useRef } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { useRecoilState } from 'recoil';
+import { testData } from '../../states/testData';
+
 import Main from './components/Main';
 import RandomGenerator from './utils/random';
 
 const Wrapper = styled.div`
   background-color: #c49f9f;
   height: 100vh;
-  width: 100vw;
+  /* width: 100vw; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -19,12 +23,14 @@ function Home() {
   const index = useRef(0);
   const dataIds = useRef<number[]>([]);
   const { id } = useParams();
+  const [inputData, setInputData] = useRecoilState(testData);
   useEffect(() => {
-    dataIds.current = RandomGenerator.run();
+    dataIds.current = RandomGenerator.run(inputData);
+
     if (!id) {
       return navigate(`/shorts/${dataIds.current[0]}`);
     }
-  }, []);
+  }, [inputData]);
 
   const downChange = () => {
     if (dataIds.current.length - 1 > index.current && scroll.current) {
