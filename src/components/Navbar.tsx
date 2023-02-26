@@ -38,7 +38,7 @@ const Plus = styled.li`
   padding: 0 20px 0 20px;
 `;
 
-function Under() {
+function Navbar() {
   return (
     <NavigationBar>
       <MenuList>
@@ -64,4 +64,4 @@ function Under() {
   );
 }
 
-export default Under;
+export default Navbar;

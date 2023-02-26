@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import Headers from '../../../components/Header';
-import Under from '../../../components/Under';
+import Navbar from '../../../components/Navbar';
 import Slide from './Slide';
 
 const Wrapper = styled.div`
@@ -29,7 +29,7 @@ function Main() {
     <Wrapper>
       <Headers></Headers>
       <Slide></Slide>
-      <Under></Under>
+      <Navbar></Navbar>
     </Wrapper>
   );
 }
