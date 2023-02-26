@@ -16,7 +16,9 @@ const Index = () => {
 
   const [isLiked, setisLiked] = useState<boolean>(false);
 
-  const { image, voteCount, description } = location.state;
+  const [isCopied, setisCopied] = useState<boolean>(false);
+
+  const { url, image, voteCount, description } = location.state;
 
   const handleLikeClick = () => {
     setisLiked(true);
@@ -28,6 +30,11 @@ const Index = () => {
 
   const likeHandler = () => {
     isLiked ? handleUnlikeClick() : handleLikeClick();
+  };
+
+  const handleCopyUrlClick = () => {
+    setisCopied(true);
+    navigator.clipboard.writeText(url);
   };
 
   const pageHandler = () => {
@@ -60,7 +67,7 @@ const Index = () => {
           <StSocial>
             <StIconBox>
               <StLike isLiked={isLiked} onClick={likeHandler} />
-              <StShare />
+              <StShare isCopied={isCopied} onClick={handleCopyUrlClick} />
             </StIconBox>
             <StParcitipation>투표 참여 : {voteCount}</StParcitipation>
           </StSocial>
@@ -145,9 +152,10 @@ const StLike = styled(FaRegThumbsUp)<{ isLiked: boolean }>`
   cursor: pointer;
 `;
 
-const StShare = styled(RiSendPlaneLine)`
+const StShare = styled(RiSendPlaneLine)<{ isCopied: boolean }>`
   width: 26px;
   height: 26px;
+  color: ${({ isCopied }) => (isCopied ? 'blue' : 'black')};
   cursor: pointer;
 `;
 

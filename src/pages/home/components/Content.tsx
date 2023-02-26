@@ -15,11 +15,14 @@ function Content(post: SlideData) {
 
   const location = useLocation();
 
-  const postId = location.pathname.split('/')[2];
+  const postId: string = location.pathname.split('/')[2];
+
+  const url: string = `localhost:3000${location.pathname}`;
 
   const pageHandler = () => {
     navigate(`/detail-page/${postId}`, {
       state: {
+        url: url,
         image: post.poster_path,
         voteCount: post.vote.vote_count,
         description: post.text,
