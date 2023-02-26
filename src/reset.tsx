@@ -131,4 +131,8 @@ License: none (public domain)
   button {
     cursor: pointer;
   }
+  * {
+    box-sizing: border-box;
+    font-family: 'Noto Sans KR', sans-serif;
+  }
 `;
