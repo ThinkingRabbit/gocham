@@ -17,21 +17,21 @@ function Home() {
   const navigate = useNavigate();
   const [scroll, setScroll] = useState(false);
   const index = useRef(0);
-  const test = useRef<number[]>([]);
+  const dataIds = useRef<number[]>([]);
   const { id } = useParams();
 
   useEffect(() => {
-    test.current = RandomGenerator.run();
+    dataIds.current = RandomGenerator.run();
     if (!id) {
-      return navigate(`/shorts/${test.current[0]}`);
+      return navigate(`/shorts/${dataIds.current[0]}`);
     }
   }, []);
 
   const downChange = () => {
     setScroll(false);
-    if (test.current.length - 1 > index.current) {
+    if (dataIds.current.length - 1 > index.current) {
       index.current += 1;
-      navigate(`/shorts/${test.current[index.current]}`);
+      navigate(`/shorts/${dataIds.current[index.current]}`);
     }
   };
 
@@ -39,7 +39,7 @@ function Home() {
     setScroll(false);
     if (index.current > 0) {
       index.current -= 1;
-      navigate(`/shorts/${test.current[index.current]}`);
+      navigate(`/shorts/${dataIds.current[index.current]}`);
     }
   };
 
