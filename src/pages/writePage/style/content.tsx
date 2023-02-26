@@ -23,7 +23,7 @@ export const Header = styled.div`
 `;
 
 export const ImgBox = styled.div<{ bgphoto: string }>`
-  background-image: url(${(props) => props.bgphoto});
+  background-image: url(${props => props.bgphoto});
   background-size: cover;
   background-position: center;
   width: 100%;

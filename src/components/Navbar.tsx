@@ -51,7 +51,9 @@ function Navbar() {
           </Link>
         </Menu>
         <Plus>
-          <img src={plusImg}></img>
+          <Link to={'/write-page'}>
+            <img src={plusImg}></img>
+          </Link>
         </Plus>
         <Menu>
           <img src={searchImg}></img>
