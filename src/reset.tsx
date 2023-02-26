@@ -107,9 +107,9 @@ License: none (public domain)
   section {
     display: block;
   }
-  <<<<<<< HEAD body {
+  body {
   }
-  =======>>>>>>>dd566ab93816fcfa1e10423f45114db0d7644eaa ol,
+  ol,
   ul {
     list-style: none;
   }
