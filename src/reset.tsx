@@ -107,9 +107,6 @@ License: none (public domain)
   section {
     display: block;
   }
-  body {
-    line-height: 1;
-  }
   ol,
   ul {
     list-style: none;
@@ -128,5 +125,8 @@ License: none (public domain)
   table {
     border-collapse: collapse;
     border-spacing: 0;
+  }
+  button {
+    cursor: pointer;
   }
 `;

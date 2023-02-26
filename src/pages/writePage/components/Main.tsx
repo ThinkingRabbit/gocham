@@ -25,9 +25,9 @@ const Navigation = styled.div`
 function Main() {
   return (
     <Wrapper>
-      <Top></Top>
-      <Slide></Slide>
-      <Navigation></Navigation>
+      <Top />
+      <Slide />
+      <Navigation />
     </Wrapper>
   );
 }
