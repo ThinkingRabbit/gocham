@@ -17,7 +17,7 @@ import {
 } from '../states/newWriteState';
 import { useRecoilState } from 'recoil';
 import { updateData } from '../data/testData';
-import { testData } from '../states/testData';
+import { lastIdx, testData } from '../states/testData';
 import { Data, SlideData } from '../pages/home/type';
 
 const NavigationBar = styled.div`
@@ -65,9 +65,10 @@ function Navbar() {
   );
   const [files, setFiles] = useRecoilState(newWriteFiles);
   const [inputData, setInputData] = useRecoilState(testData);
+  const [idx, setIdx] = useRecoilState(lastIdx);
 
   useEffect(() => {
-    location.pathname == '/write-page'
+    location.pathname === '/write-page'
       ? setIsWritePage(true)
       : setIsWritePage(false);
 
@@ -79,7 +80,7 @@ function Navbar() {
           'https://user-images.githubusercontent.com/76567238/221376420-ee96140e-170c-4357-996b-9c7fcf9252e0.png',
         text: contents,
         posting_date: '2022-02-27',
-        id: 62,
+        id: idx,
         vote: {
           vote_text: [leftValue, rightValue],
           vote_count: 0,
@@ -88,11 +89,11 @@ function Navbar() {
         },
         like: 0,
       };
+      setIdx(value => value + 1);
       setInputData({
         result: [...inputData.result, saveData],
       });
 
-      console.log(saveData);
       setTitle('');
       setContents('');
       setLeftButtonCustom('');
@@ -100,8 +101,6 @@ function Navbar() {
       setFiles('');
     }
   }, [location]);
-
-  useEffect(() => {}, [isWritePage]);
 
   return (
     <NavigationBar>
@@ -114,12 +113,12 @@ function Navbar() {
         </Menu>
         <Plus>
           {isWritePage ? (
-            <Link to={'/shorts/62'}>
-              <img src={checkImg}></img>
+            <Link to={`/shorts/${idx}`}>
+              <img src={checkImg} />
             </Link>
           ) : (
-            <Link to={'/write-page'}>
-              <img src={plusImg}></img>
+            <Link to="/write-page">
+              <img src={plusImg} />
             </Link>
           )}
         </Plus>

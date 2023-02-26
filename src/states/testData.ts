@@ -1,6 +1,11 @@
 import { Data, SlideData } from '../pages/home/type';
 import { atom } from 'recoil';
 
+export const lastIdx = atom({
+  key: 'lastIdx',
+  default: 62,
+});
+
 export const testData = atom({
   key: 'testData',
   default: {
