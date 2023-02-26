@@ -1,5 +1,4 @@
 import styled from '@emotion/styled';
-import { Link } from 'react-router-dom';
 import plusImg from '../assets/images/icons/plus.png';
 import searchImg from '../assets/images/icons/search.png';
 import userImg from '../assets/images/icons/user.png';
@@ -12,10 +11,10 @@ const NavigationBar = styled.div`
 
 const MenuList = styled.ul`
   display: flex;
+  background-color: #ededed;
   justify-content: space-between;
   align-items: flex-end;
   flex-direction: row;
-  liststyle: none;
   height: 100%;
 `;
 
@@ -43,21 +42,19 @@ function Navbar() {
     <NavigationBar>
       <MenuList>
         <Menu>
-          <img src={trophyImg}></img>
+          <img alt="메뉴1" src={trophyImg} />
         </Menu>
         <Menu>
-          <Link to={'/'}>
-            <img src={homeImg}></img>
-          </Link>
+          <img alt="메뉴2" src={homeImg} />
         </Menu>
         <Plus>
-          <img src={plusImg}></img>
+          <img alt="메뉴3" src={plusImg} />
         </Plus>
         <Menu>
-          <img src={searchImg}></img>
+          <img alt="" src={searchImg} />
         </Menu>
         <Menu>
-          <img src={userImg}></img>
+          <img alt="" src={userImg} />
         </Menu>
       </MenuList>
     </NavigationBar>
