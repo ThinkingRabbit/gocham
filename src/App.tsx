@@ -3,6 +3,7 @@ import WritePage from './pages/writePage/index';
 import { Global } from '@emotion/react';
 import { reset } from './reset';
 import { Route, Routes } from 'react-router-dom';
+
 import {
   RecoilRoot,
   atom,
@@ -15,12 +16,15 @@ import DetailPage from './pages/detailPage';
 function App() {
   return (
     <>
-      <Global styles={reset} />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/write-page" element={<WritePage />} />
-        <Route path="/detail-page" element={<DetailPage />} />
-      </Routes>
+      <RecoilRoot>
+        <Global styles={reset}></Global>
+        <Routes>
+          <Route path="/" element={<Home />}></Route>
+          <Route path="/shorts/:id" element={<Home />} />
+          <Route path="/write-page" element={<WritePage />} />
+          <Route path="/detail-page" element={<DetailPage />} />
+        </Routes>
+      </RecoilRoot>
     </>
   );
 }

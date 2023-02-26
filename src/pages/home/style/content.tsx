@@ -11,7 +11,7 @@ export const Wrapper = styled.div`
   border-radius: 20px;
 `;
 
-export const Header = styled.div`
+export const Head = styled.div`
   height: 45px;
   background-color: #f5f5f5;
   display: flex;
@@ -59,9 +59,4 @@ export const VoteText = styled.span`
   line-height: 17px;
   /* identical to box height */
   color: #484848;
-`;
-
-export const IconBox = styled.div`
-  display: flex;
-  gap: 10px;
 `;

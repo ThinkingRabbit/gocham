@@ -107,6 +107,8 @@ License: none (public domain)
   section {
     display: block;
   }
+  body {
+  }
   ol,
   ul {
     list-style: none;
