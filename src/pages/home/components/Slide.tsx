@@ -8,7 +8,7 @@ function Slide(any: any) {
 
   return (
     <>
-      {data.result.map((poster) => {
+      {data.result.map(poster => {
         if (poster!.id === +id!) {
           return (
             <Wrapper key={poster.id}>

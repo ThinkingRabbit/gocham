@@ -1,12 +1,11 @@
 import styled from '@emotion/styled';
-import { Link } from 'react-router-dom';
 import plusImg from '../assets/images/icons/plus.png';
 import searchImg from '../assets/images/icons/search.png';
 import userImg from '../assets/images/icons/user.png';
 import homeImg from '../assets/images/icons/home.png';
 import checkImg from '../assets/images/icons/checkImg.png';
 import trophyImg from '../assets/images/icons/trophy.png';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
 const NavigationBar = styled.div`
@@ -15,10 +14,10 @@ const NavigationBar = styled.div`
 
 const MenuList = styled.ul`
   display: flex;
+  background-color: #ededed;
   justify-content: space-between;
   align-items: flex-end;
   flex-direction: row;
-  liststyle: none;
   height: 100%;
 `;
 
@@ -55,12 +54,10 @@ function Navbar() {
     <NavigationBar>
       <MenuList>
         <Menu>
-          <img src={trophyImg}></img>
+          <img alt="메뉴1" src={trophyImg} />
         </Menu>
         <Menu>
-          <Link to={'/'}>
-            <img src={homeImg}></img>
-          </Link>
+          <img alt="메뉴2" src={homeImg} />
         </Menu>
         <Plus>
           {isWritePage ? (
@@ -74,10 +71,10 @@ function Navbar() {
           )}
         </Plus>
         <Menu>
-          <img src={searchImg}></img>
+          <img alt="" src={searchImg} />
         </Menu>
         <Menu>
-          <img src={userImg}></img>
+          <img alt="" src={userImg} />
         </Menu>
       </MenuList>
     </NavigationBar>
