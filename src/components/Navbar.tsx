@@ -17,7 +17,8 @@ import {
 } from '../states/newWriteState';
 import { useRecoilState } from 'recoil';
 import { updateData } from '../data/testData';
-import { SlideData } from '../pages/home/type';
+import { testData } from '../states/testData';
+import { Data, SlideData } from '../pages/home/type';
 
 const NavigationBar = styled.div`
   margin: 0 10px 0 10px;
@@ -63,6 +64,7 @@ function Navbar() {
     newWriteRightButtonCustom
   );
   const [files, setFiles] = useRecoilState(newWriteFiles);
+  const [inputData, setInputData] = useRecoilState(testData);
 
   useEffect(() => {
     location.pathname == '/write-page'
@@ -73,10 +75,11 @@ function Navbar() {
       const leftValue = leftButtonCustom ? leftButtonCustom : '찬성';
       const rightValue = rightButtonCustom ? rightButtonCustom : '반대';
       const saveData: SlideData = {
+        poster_path:
+          'https://user-images.githubusercontent.com/76567238/221376420-ee96140e-170c-4357-996b-9c7fcf9252e0.png',
         text: contents,
-        poster_path: files,
         posting_date: '2022-02-27',
-        id: 58,
+        id: 62,
         vote: {
           vote_text: [leftValue, rightValue],
           vote_count: 0,
@@ -85,7 +88,10 @@ function Navbar() {
         },
         like: 0,
       };
-      updateData(saveData);
+      setInputData({
+        result: [...inputData.result, saveData],
+      });
+
       console.log(saveData);
       setTitle('');
       setContents('');
@@ -108,7 +114,7 @@ function Navbar() {
         </Menu>
         <Plus>
           {isWritePage ? (
-            <Link to={'/'}>
+            <Link to={'/shorts/62'}>
               <img src={checkImg}></img>
             </Link>
           ) : (

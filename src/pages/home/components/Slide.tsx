@@ -1,8 +1,10 @@
 import Content from './Content';
-import data from '../../../data/testData';
+// import data from '../../../data/testData';
 import { Wrapper, VoteSection, Button } from '../style/slide';
 import { useParams } from 'react-router-dom';
 import { useState } from 'react';
+import { useRecoilState } from 'recoil';
+import { testData } from '../../../states/testData';
 
 function Slide(any: any) {
   const { id } = useParams();
@@ -10,10 +12,11 @@ function Slide(any: any) {
   const onClick = () => {
     console.log('hi');
   };
+  const [inputData, setInputData] = useRecoilState(testData);
 
   return (
     <>
-      {data.result.map(poster => {
+      {inputData.result.map(poster => {
         if (poster!.id === +id!) {
           return (
             <Wrapper key={poster.id}>
