@@ -10,9 +10,17 @@ const Layout = ({ children }: any) => {
 };
 
 const StLayout = styled.div`
-  margin: 0 auto;
-  width: 390px;
+  position: relative;
+  margin: auto;
+  width: 100%;
+  max-width: 430px;
   height: 100vh;
+  border: 1px solid black;
+  box-sizing: border-box;
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  overflow-y: scroll;
 `;
 
 const StWrapper = styled.div`
