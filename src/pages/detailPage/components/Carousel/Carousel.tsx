@@ -3,7 +3,11 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
-const Carousel = () => {
+interface IProps {
+  image: string;
+}
+
+const Carousel = ({ image }: IProps) => {
   const settings = {
     dots: true,
     infinite: true,
@@ -13,19 +17,10 @@ const Carousel = () => {
   };
   return (
     <StSlider {...settings}>
-      {IMAGES.map((cur, idx) => (
-        <StImage src={cur} key={idx} alt="이미지" />
-      ))}
+      <StImage src={image} alt="이미지" />
     </StSlider>
   );
 };
-
-const IMAGES = [
-  'https://avatars.githubusercontent.com/u/126273825?s=64&v=4',
-  'https://avatars.githubusercontent.com/u/126273825?s=64&v=4',
-  'https://avatars.githubusercontent.com/u/126273825?s=64&v=4',
-  'https://avatars.githubusercontent.com/u/126273825?s=64&v=4',
-];
 
 const StSlider = styled(Slider)`
   position: relative;

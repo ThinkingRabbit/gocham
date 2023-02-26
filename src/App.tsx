@@ -15,17 +15,16 @@ import DetailPage from './pages/detailPage';
 
 function App() {
   return (
-    <>
-      <RecoilRoot>
-        <Global styles={reset}></Global>
-        <Routes>
-          <Route path="/" element={<Home />}></Route>
-          <Route path="/shorts/:id" element={<Home />} />
-          <Route path="/write-page" element={<WritePage />} />
-          <Route path="/detail-page" element={<DetailPage />} />
-        </Routes>
-      </RecoilRoot>
-    </>
+    <RecoilRoot>
+      <Global styles={reset} />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/shorts/:id" element={<Home />} />
+        <Route path="/write-page" element={<WritePage />} />
+        <Route path="/detail-page" element={<DetailPage />} />
+        <Route path="/detail-page/:postId" element={<DetailPage />} />
+      </Routes>
+    </RecoilRoot>
   );
 }
 
