@@ -107,9 +107,9 @@ License: none (public domain)
   section {
     display: block;
   }
-  body {
+  <<<<<<< HEAD body {
   }
-  ol,
+  =======>>>>>>>dd566ab93816fcfa1e10423f45114db0d7644eaa ol,
   ul {
     list-style: none;
   }
@@ -127,5 +127,8 @@ License: none (public domain)
   table {
     border-collapse: collapse;
     border-spacing: 0;
+  }
+  button {
+    cursor: pointer;
   }
 `;

@@ -54,7 +54,7 @@ function Home() {
 
   return (
     <Wrapper>
-      <Main></Main>
+      <Main />
     </Wrapper>
   );
 }

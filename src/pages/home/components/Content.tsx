@@ -1,4 +1,10 @@
-import { Wrapper, ImgBox, FunctionalBox, TextBox, VoteText } from '../style/content';
+import {
+  Wrapper,
+  ImgBox,
+  FunctionalBox,
+  TextBox,
+  VoteText,
+} from '../style/content';
 import Header from './Header';
 import Icon from './Icon';
 import { SlideData } from '../type/index';

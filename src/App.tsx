@@ -11,6 +11,7 @@ import {
   useRecoilState,
   useRecoilValue,
 } from 'recoil';
+import DetailPage from './pages/detailPage';
 
 function App() {
   return (
@@ -20,6 +21,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />}></Route>
           <Route path="/shorts/:id" element={<Home />} />
+          <Route path="/write-page" element={<WritePage />} />
+          <Route path="/detail-page" element={<DetailPage />} />
         </Routes>
       </RecoilRoot>
     </>
