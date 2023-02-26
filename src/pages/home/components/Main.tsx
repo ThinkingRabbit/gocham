@@ -1,4 +1,6 @@
 import styled from '@emotion/styled';
+import Headers from '../../../components/Header';
+import Under from '../../../components/Under';
 import Slide from './Slide';
 
 const Wrapper = styled.div`
@@ -25,9 +27,9 @@ const Navigation = styled.div`
 function Main() {
   return (
     <Wrapper>
-      <Top></Top>
-      <Slide> </Slide>
-      <Navigation></Navigation>
+      <Headers></Headers>
+      <Slide></Slide>
+      <Under></Under>
     </Wrapper>
   );
 }
