@@ -51,61 +51,48 @@ const Login = () => {
   };
 
   return (
-    <StWrapper>
-      <StLogin>
-        <StHeader>Login</StHeader>
-        <StBody>
-          <StInput
-            value={id}
-            name="id"
-            placeholder="아이디"
-            onChange={userInfoHandler}
-          />
-          <StInput
-            value={password}
-            name="password"
-            type={isVisible ? 'text' : 'password'}
-            placeholder="비밀번호"
-            onChange={userInfoHandler}
-          />
-          {isVisible ? (
-            <StOpen onClick={visibleHandler} />
-          ) : (
-            <StClosed onClick={visibleHandler} />
-          )}
-        </StBody>
-        <StFooter>
-          <StButton
-            onClick={() => {
-              navigate('/signup');
-            }}
-          >
-            회원가입
-          </StButton>
-          <StButton onClick={submit}>로그인</StButton>
-        </StFooter>
-      </StLogin>
-    </StWrapper>
+    <StLogin>
+      <StHeader>Login</StHeader>
+      <StBody>
+        <StInput
+          value={id}
+          name="id"
+          placeholder="아이디"
+          onChange={userInfoHandler}
+        />
+        <StInput
+          value={password}
+          name="password"
+          type={isVisible ? 'text' : 'password'}
+          placeholder="비밀번호"
+          onChange={userInfoHandler}
+        />
+        {isVisible ? (
+          <StOpen onClick={visibleHandler} />
+        ) : (
+          <StClosed onClick={visibleHandler} />
+        )}
+      </StBody>
+      <StFooter>
+        <StButton
+          onClick={() => {
+            navigate('/signup');
+          }}
+        >
+          회원가입
+        </StButton>
+        <StButton onClick={submit}>로그인</StButton>
+      </StFooter>
+    </StLogin>
   );
 };
-
-const StWrapper = styled.div`
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #c49f9f;
-  box-sizing: border-box;
-`;
 
 const StLogin = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  width: 470px;
-  height: 100vh;
+  width: 100%;
   background: white;
 `;
 
