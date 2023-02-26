@@ -6,9 +6,9 @@ import { useState } from 'react';
 
 function Slide(any: any) {
   const { id } = useParams();
-  const [click, setClick] = useState(true);
+  const [click, setClick] = useState(false);
   const onClick = () => {
-    console.log('hi');
+    setClick(true);
   };
 
   return (
@@ -17,10 +17,16 @@ function Slide(any: any) {
         if (poster!.id === +id!) {
           return (
             <Wrapper key={poster.id}>
-              <Content {...poster}></Content>
+              <Content {...poster} />
               <VoteSection onClick={onClick}>
-                <Button>{poster.vote.vote_text[0]}</Button>
-                <Button>{poster.vote.vote_text[1]}</Button>
+                {click ? (
+                  <div>안녕</div>
+                ) : (
+                  <>
+                    <Button>{poster.vote.vote_text[0]}</Button>
+                    <Button>{poster.vote.vote_text[1]}</Button>
+                  </>
+                )}
               </VoteSection>
             </Wrapper>
           );

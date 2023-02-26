@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
-import { useEffect, useRef, useState } from 'react';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useEffect, useRef } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import Main from './components/Main';
 import RandomGenerator from './utils/random';
 
@@ -19,10 +19,9 @@ function Home() {
   const index = useRef(0);
   const dataIds = useRef<number[]>([]);
   const { id } = useParams();
-  const check = useEffect(() => {
+  useEffect(() => {
     dataIds.current = RandomGenerator.run();
     if (!id) {
-      console.log('no');
       return navigate(`/shorts/${dataIds.current[0]}`);
     }
   }, []);
