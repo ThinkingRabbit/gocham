@@ -12,15 +12,14 @@ import {
   useRecoilValue,
 } from 'recoil';
 
-
 function App() {
   return (
     <>
       <RecoilRoot>
         <Global styles={reset}></Global>
         <Routes>
-          <Route path='/' element={<Home />}></Route>
-          <Route path='/shorts/:id' element={<Home />} />
+          <Route path="/" element={<Home />}></Route>
+          <Route path="/shorts/:id" element={<Home />} />
         </Routes>
       </RecoilRoot>
     </>
