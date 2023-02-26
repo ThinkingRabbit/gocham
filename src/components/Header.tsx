@@ -11,7 +11,7 @@ const Logo = styled.div`
 function Header() {
   return (
     <Logo>
-      <img src={logoImg} style={{ width: '143px', height: '50px' }}></img>
+      <img alt="img" src={logoImg} style={{ width: '143px', height: '50px' }} />
     </Logo>
   );
 }

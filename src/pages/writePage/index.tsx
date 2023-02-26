@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { useEffect, useRef } from 'react';
 import Main from './components/Main';
 
 const Wrapper = styled.div`

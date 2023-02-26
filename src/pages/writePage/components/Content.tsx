@@ -45,7 +45,7 @@ function Content({
       reader.onload = () => {
         // console.log(reader.result);
         fileURLs[i] = reader.result;
-        setFiles([...fileURLs]);
+        setFiles(() => [...fileURLs]);
       };
       reader.readAsDataURL(file);
     }
@@ -108,14 +108,14 @@ function Content({
       <FunctionalBox>
         <WritePageInputBox
           value={title}
-          onChange={e => setTitle(e.target.value)}
+          onChange={e => setTitle(value => e.target.value)}
           placeholder="제목을 입력해주세요"
         />
       </FunctionalBox>
       <WritePageTextBox>
         <Textarea
           value={contents}
-          onChange={e => setContents(e.target.value)}
+          onChange={e => setContents(value => e.target.value)}
           placeholder="여러분들의 질문거리를 남겨주세요!"
         />
       </WritePageTextBox>

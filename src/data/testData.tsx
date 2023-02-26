@@ -1,6 +1,6 @@
-import { Data } from '../pages/home/type';
+import { Data, SlideData } from '../pages/home/type';
 
-const data: Data = {
+let data: Data = {
   result: [
     {
       poster_path:
@@ -113,3 +113,7 @@ const data: Data = {
 };
 
 export default data;
+
+export const updateData = (dataSet: SlideData) => {
+  data.result = [...data.result, dataSet];
+};

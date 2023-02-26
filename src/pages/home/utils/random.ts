@@ -1,4 +1,3 @@
-import data from '../../../data/testData';
 import { Data } from '../type';
 
 const RandomGenerator = {
@@ -9,8 +8,8 @@ const RandomGenerator = {
     }, []);
   },
 
-  run() {
-    return this.set(data).sort(() => Math.random() - 0.5);
+  run(datas: Data) {
+    return this.set(datas).sort(() => Math.random() - 0.5);
   },
 };
 
