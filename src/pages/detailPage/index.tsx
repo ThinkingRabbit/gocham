@@ -5,6 +5,7 @@ import { MdArrowBackIos } from 'react-icons/md';
 import { RxHamburgerMenu } from 'react-icons/rx';
 import { FaRegThumbsUp } from 'react-icons/fa';
 import { RiSendPlaneLine } from 'react-icons/ri';
+import { CommentType } from './type/comment.type';
 import Carousel from './components/Carousel/Carousel';
 import Comment from './components/Comment/Comment';
 
@@ -29,6 +30,20 @@ const Index = () => {
     navigate('/');
   };
 
+  const comment: CommentType = {
+    id: 1,
+    name: '디아',
+    profile: '',
+    comment:
+      '내용이 작성됩니다.내용이 작성됩니다.내용이 작성됩니다.내용이 작성됩니다.내용이 작성됩니다.내용이 작성됩니다.',
+    selected: '신발을 산다',
+    isBlue: true,
+    like: {
+      isLiked: false,
+      likeCount: 1234,
+    },
+  };
+
   return (
     <StWrapper>
       <StDetail>
@@ -48,7 +63,7 @@ const Index = () => {
           <StInfo>저 이 신발 3000만원인데 사도 될까요? 연봉 10억이에요.</StInfo>
         </StBody>
         <StFooter>
-          <Comment />
+          <Comment {...comment} />
         </StFooter>
       </StDetail>
     </StWrapper>
