@@ -129,6 +129,7 @@ function Content({
               <InsertUrlInput
                 value={files}
                 onChange={e => setFiles(e.target.value)}
+                placeholder=" 이미지 URL을 입력해주세요"
               />
               <div style={{ cursor: 'pointer' }} onClick={onLoadFile}>
                 ✔️

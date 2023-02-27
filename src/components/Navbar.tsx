@@ -66,6 +66,7 @@ function Navbar() {
 
   const goMainButton = () => {
     if (title !== '' && contents !== '') navigation(`/shorts/${idx}`);
+    else alert('내용을 채운 후 클릭해주세요!');
   };
 
   useEffect(() => {
