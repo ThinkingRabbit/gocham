@@ -30,7 +30,7 @@ export const testData = atom({
         poster_path:
           'https://user-images.githubusercontent.com/76567238/221348823-206633b2-52dd-40a0-b808-c42b2f85c4ad.png',
 
-        text: '뭐양',
+        text: '이거신발 동생줄려고하는데 줄까요?',
         posting_date: '2022-01-21',
         id: 55,
 
@@ -53,7 +53,7 @@ export const testData = atom({
 
         vote: {
           vote_count: 999,
-          vote_text: ['뭐야', '뭘봐'],
+          vote_text: ['주자', '주지말자'],
           vote_case_left: 900,
           vote_case_right: 99,
           vote_click: false,
@@ -123,6 +123,22 @@ export const testData = atom({
           vote_click: false,
         },
         like: 3252,
+      },
+      {
+        poster_path:
+          'https://user-images.githubusercontent.com/76567238/221549245-124e8c6c-b0c3-4cb6-86b5-a72b6f5b0a3d.png',
+
+        text: '이번에 예비 고2인데 이거 안 풀리는 데 정답이 4번인가요?  5번인가요 ?',
+        posting_date: '2022-01-43',
+        id: 523,
+        vote: {
+          vote_count: 520,
+          vote_text: ['4', '5'],
+          vote_case_left: 220,
+          vote_case_right: 300,
+          vote_click: false,
+        },
+        like: 3212,
       },
     ],
   },

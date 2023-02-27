@@ -22,7 +22,7 @@ let data: Data = {
       poster_path:
         'https://user-images.githubusercontent.com/76567238/221348823-206633b2-52dd-40a0-b808-c42b2f85c4ad.png',
 
-      text: '뭐양',
+      text: '이거신발 동생줄려고하는데 줄까요?',
       posting_date: '2022-01-21',
       id: 55,
 
@@ -45,7 +45,7 @@ let data: Data = {
 
       vote: {
         vote_count: 999,
-        vote_text: ['뭐야', '뭘봐'],
+        vote_text: ['주자', '주지말자'],
         vote_case_left: 900,
         vote_case_right: 99,
         vote_click: false,
@@ -115,6 +115,22 @@ let data: Data = {
         vote_click: false,
       },
       like: 3252,
+    },
+    {
+      poster_path:
+        'https://user-images.githubusercontent.com/76567238/221376368-166214d4-a37b-4eae-8dfc-91c8312e975b.png',
+
+      text: '이번에 예비 고2인데 이거 정답이 4번인가요? 5번인가요 ?',
+      posting_date: '2022-01-43',
+      id: 523,
+      vote: {
+        vote_count: 520,
+        vote_text: ['A', 'B'],
+        vote_case_left: 220,
+        vote_case_right: 300,
+        vote_click: false,
+      },
+      like: 3212,
     },
   ],
 };
