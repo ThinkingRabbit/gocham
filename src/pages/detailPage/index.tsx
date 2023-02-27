@@ -160,7 +160,7 @@ const StDetail = styled.div`
   flex-direction: column;
   margin: 0 auto;
   width: 400px;
-  height: 790px;
+  height: 100vh;
   background: white;
   overflow: scroll;
 `;
