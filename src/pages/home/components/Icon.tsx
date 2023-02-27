@@ -1,8 +1,14 @@
 import styled from '@emotion/styled';
 
-export const IconBox = styled.div`
+const IconBox = styled.div`
   display: flex;
   gap: 10px;
+`;
+
+const chatIcon = styled.div`
+  &:hover::before {
+    transform: translate(200px);
+  }
 `;
 
 function Icon() {
