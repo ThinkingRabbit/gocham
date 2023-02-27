@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/gocham/static/css/main.dfeed50c.css",
-    "main.js": "/gocham/static/js/main.826c6287.js",
+    "main.js": "/gocham/static/js/main.b6e77783.js",
     "static/js/787.d0ec9903.chunk.js": "/gocham/static/js/787.d0ec9903.chunk.js",
     "static/media/logo.png": "/gocham/static/media/logo.d028fffade14f60d9d18.png",
     "index.html": "/gocham/index.html",
     "main.dfeed50c.css.map": "/gocham/static/css/main.dfeed50c.css.map",
-    "main.826c6287.js.map": "/gocham/static/js/main.826c6287.js.map",
+    "main.b6e77783.js.map": "/gocham/static/js/main.b6e77783.js.map",
     "787.d0ec9903.chunk.js.map": "/gocham/static/js/787.d0ec9903.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.dfeed50c.css",
-    "static/js/main.826c6287.js"
+    "static/js/main.b6e77783.js"
   ]
 }
