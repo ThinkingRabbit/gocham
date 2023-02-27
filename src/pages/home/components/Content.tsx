@@ -35,7 +35,7 @@ function Content(post: SlideData) {
       <Header />
       <ImgBox bgphoto={post.poster_path} onClick={pageHandler} />
       <FunctionalBox>
-        <Icon />
+        <Icon {...post} />
         <VoteText>{`투표 참여 : ${post.vote.vote_count}`}</VoteText>
       </FunctionalBox>
       <TextBox>{post.text}</TextBox>
