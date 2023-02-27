@@ -1,5 +1,4 @@
 import styled from '@emotion/styled';
-import { sign } from 'crypto';
 import React, { useState } from 'react';
 import { RxEyeOpen, RxEyeClosed } from 'react-icons/rx';
 import { useNavigate } from 'react-router-dom';
@@ -51,49 +50,65 @@ const Login = () => {
   };
 
   return (
-    <StLogin>
-      <StHeader>Login</StHeader>
-      <StBody>
-        <StInput
-          value={id}
-          name="id"
-          placeholder="아이디"
-          onChange={userInfoHandler}
-        />
-        <StInput
-          value={password}
-          name="password"
-          type={isVisible ? 'text' : 'password'}
-          placeholder="비밀번호"
-          onChange={userInfoHandler}
-        />
-        {isVisible ? (
-          <StOpen onClick={visibleHandler} />
-        ) : (
-          <StClosed onClick={visibleHandler} />
-        )}
-      </StBody>
-      <StFooter>
-        <StButton
-          onClick={() => {
-            navigate('/signup');
-          }}
-        >
-          회원가입
-        </StButton>
-        <StButton onClick={submit}>로그인</StButton>
-      </StFooter>
-    </StLogin>
+    <StWrapper>
+      <StLogin>
+        <StHeader>Login</StHeader>
+        <StBody>
+          <StInput
+            value={id}
+            name="id"
+            placeholder="아이디"
+            onChange={userInfoHandler}
+          />
+          <StInput
+            value={password}
+            name="password"
+            type={isVisible ? 'text' : 'password'}
+            placeholder="비밀번호"
+            onChange={userInfoHandler}
+          />
+          {isVisible ? (
+            <StOpen onClick={visibleHandler} />
+          ) : (
+            <StClosed onClick={visibleHandler} />
+          )}
+        </StBody>
+        <StFooter>
+          <StButton
+            onClick={() => {
+              navigate('/signup');
+            }}
+            style={{
+              background: 'white',
+              color: '#5783fc',
+              border: '1px solid #5783fc',
+            }}
+          >
+            회원가입
+          </StButton>
+          <StButton onClick={submit}>로그인</StButton>
+        </StFooter>
+      </StLogin>
+    </StWrapper>
   );
 };
+
+const StWrapper = styled.div`
+  width: 100%;
+  height: 100vh;
+  background: #5783fc;
+`;
 
 const StLogin = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  width: 100%;
+  margin: 0 auto;
+  max-width: 400px;
+  height: 100vh;
   background: white;
+  border: 1px solid black;
 `;
 
 const StHeader = styled.p`
@@ -113,22 +128,29 @@ const StBody = styled.div`
 
 const StInput = styled.input`
   margin-top: 30px;
+  padding: 5px;
+  padding-left: 10px;
   width: 60%;
-  height: 30px;
+  height: 40px;
+  border: none;
+  border: 2px solid #5783fc;
+  border-radius: 5px;
+  font-size: 15px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 `;
 
 const StOpen = styled(RxEyeOpen)`
   position: absolute;
-  bottom: 9px;
-  right: 60px;
+  bottom: 11px;
+  right: 50px;
   font-size: 18px;
   cursor: pointer;
 `;
 
 const StClosed = styled(RxEyeClosed)`
   position: absolute;
-  bottom: 9px;
-  right: 60px;
+  bottom: 11px;
+  right: 50px;
   font-size: 18px;
   cursor: pointer;
 `;
@@ -138,12 +160,19 @@ const StFooter = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-top: 30px;
-  width: 62%;
+  width: 60%;
 `;
 
 const StButton = styled.button`
-  width: 40%;
-  height: 30px;
+  padding-top: 3px;
+  width: 45%;
+  height: 35px;
+  color: white;
+  background-color: #5783fc;
+  border: none;
+  border-radius: 5px;
+  font-weight: 600;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 `;
 
 export default Login;

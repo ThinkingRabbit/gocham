@@ -88,7 +88,9 @@ const SignUp = () => {
             <StClosed onClick={visibleHandler} />
           )}
         </StBody>
-        <StFooter onClick={submit}>완료</StFooter>
+        <StFooter canSubmit={canSubmit} onClick={submit}>
+          완료
+        </StFooter>
       </StSignUp>
     </StWrapper>
   );
@@ -97,11 +99,7 @@ const SignUp = () => {
 const StWrapper = styled.div`
   width: 100%;
   height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #c49f9f;
-  box-sizing: border-box;
+  background: #5783fc;
 `;
 
 const StSignUp = styled.div`
@@ -109,9 +107,11 @@ const StSignUp = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  width: 470px;
+  margin: 0 auto;
+  max-width: 400px;
   height: 100vh;
   background: white;
+  border: 1px solid black;
 `;
 
 const StHeader = styled.p`
@@ -131,30 +131,45 @@ const StBody = styled.div`
 
 const StInput = styled.input`
   margin-top: 30px;
+  padding: 5px;
+  padding-left: 10px;
   width: 60%;
-  height: 30px;
+  height: 40px;
+  border: none;
+  border: 2px solid #5783fc;
+  border-radius: 5px;
+  font-size: 15px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 `;
 
 const StOpen = styled(RxEyeOpen)`
   position: absolute;
-  bottom: 9px;
-  right: 60px;
+  bottom: 11px;
+  right: 50px;
   font-size: 18px;
   cursor: pointer;
 `;
 
 const StClosed = styled(RxEyeClosed)`
   position: absolute;
-  bottom: 9px;
-  right: 60px;
+  bottom: 11px;
+  right: 50px;
   font-size: 18px;
   cursor: pointer;
 `;
 
-const StFooter = styled.button`
+const StFooter = styled.button<{ canSubmit: boolean }>`
   margin-top: 30px;
-  width: 62%;
-  height: 35px;
+  width: 60%;
+  height: 40px;
+  color: ${({ canSubmit }) => (canSubmit ? 'white' : '#5783fc')};
+  background: ${({ canSubmit }) => (canSubmit ? '#5783fc' : 'white')};
+  border: none;
+  border: 1px solid #5783fc;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: 600;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 `;
 
 export default SignUp;
