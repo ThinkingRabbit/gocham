@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-expressions */
 import styled from '@emotion/styled';
 import plusImg from '../assets/images/icons/plus.png';
 import searchImg from '../assets/images/icons/search.png';
@@ -63,10 +64,21 @@ function Navbar() {
   const [inputData, setInputData] = useRecoilState(testData);
   const [idx, setIdx] = useRecoilState(lastIdx);
   const navigation = useNavigate();
+  const isLogin = localStorage.getItem('userInfo');
 
   const goMainButton = () => {
     if (title !== '' && contents !== '') navigation(`/shorts/${idx}`);
     else alert('내용을 채운 후 클릭해주세요!');
+  };
+
+  const pageHandler = (page: string) => {
+    if (page === 'write-page' || page === 'my-page') {
+      isLogin
+        ? navigation(`/${page}`)
+        : (window.alert('로그인이 필요한 서비스입니다'), navigation('/login'));
+    } else {
+      navigation(`/${page}`);
+    }
   };
 
   useEffect(() => {
@@ -117,15 +129,23 @@ function Navbar() {
           {isWritePage ? (
             <img src={checkImg} onClick={() => goMainButton()} alt="" />
           ) : (
-            <Link to="/write-page">
+            <Menu
+              onClick={() => {
+                pageHandler('write-page');
+              }}
+            >
               <img alt="img" src={plusImg} />
-            </Link>
+            </Menu>
           )}
         </Plus>
         <Menu>
           <img alt="" src={searchImg} />
         </Menu>
-        <Menu>
+        <Menu
+          onClick={() => {
+            pageHandler('my-page');
+          }}
+        >
           <img alt="" src={userImg} />
         </Menu>
       </MenuList>
