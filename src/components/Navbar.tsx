@@ -5,7 +5,7 @@ import userImg from '../assets/images/icons/user.png';
 import homeImg from '../assets/images/icons/home.png';
 import checkImg from '../assets/images/icons/checkImg.png';
 import trophyImg from '../assets/images/icons/trophy.png';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import {
   newWriteContent,
@@ -66,6 +66,11 @@ function Navbar() {
   const [files, setFiles] = useRecoilState(newWriteFiles);
   const [inputData, setInputData] = useRecoilState(testData);
   const [idx, setIdx] = useRecoilState(lastIdx);
+  const navigation = useNavigate();
+
+  const goMainButton = () => {
+    if (title !== '' && contents !== '') navigation(`/shorts/${idx}`);
+  };
 
   useEffect(() => {
     location.pathname === '/write-page'
@@ -113,9 +118,7 @@ function Navbar() {
         </Menu>
         <Plus>
           {isWritePage ? (
-            <Link to={`/shorts/${idx}`}>
-              <img src={checkImg} />
-            </Link>
+            <img src={checkImg} onClick={() => goMainButton()} />
           ) : (
             <Link to="/write-page">
               <img src={plusImg} />
