@@ -81,8 +81,7 @@ function Navbar() {
       const leftValue = leftButtonCustom ? leftButtonCustom : '찬성';
       const rightValue = rightButtonCustom ? rightButtonCustom : '반대';
       const saveData: SlideData = {
-        poster_path:
-          'https://user-images.githubusercontent.com/76567238/221376420-ee96140e-170c-4357-996b-9c7fcf9252e0.png',
+        poster_path: files,
         text: contents,
         posting_date: '2022-02-27',
         id: idx,
