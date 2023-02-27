@@ -37,32 +37,7 @@ function Icon() {
           />
         </defs>
       </svg>
-      <svg
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        xmlnsXlink="http://www.w3.org/1999/xlink"
-      >
-        <rect width="24" height="24" fill="url(#pattern2)" />
-        <defs>
-          <pattern
-            id="pattern2"
-            patternContentUnits="objectBoundingBox"
-            width="1"
-            height="1"
-          >
-            <use xlinkHref="#image0_2_55" transform="scale(0.03125)" />
-          </pattern>
-          <image
-            id="image0_2_55"
-            width="32"
-            height="32"
-            xlinkHref="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAABp0lEQVRYCe2UvS4FQRiGT+jQCK5CFBpRSJy4BhoSDWoVF+AWTkJcAY5CofBzNRIRNEIn0XheOd/JxM7Mzs6e3ep8yZOZ/ebn/fbd2el0xtGOA/PIHMAjfMAJNB4S3YcH+IQr6ME3qIhGYpZdd+EWvgatnmdgDd7gDFTUyCImaiImvkGiD3KmVqSImoArPkVSn2PBBqu0VURtX1dcuS2oZH+OaEhc+ST764jGxEvtX2W1+8ts8qxFVWOdBe/Q/bdQ+0Xtf2bCDuSImlZIXOO6B6Kn/54J17AIORETN/t1OQVDk47gFS6hSiFd5vtsJ/0XpfbbRLXTcAgvoBttGWKhX03iumRC0WdgLzQYyqcUkiJu9mddPiouVEiKuNbr8tH5qh0qxM7IDf3YN3fFSk+/Ozmlr0JOQUWUhdkfPf1lm/jGVYT+liXfoJMbmf3OnsPuMb2L4ZO/k3X6/VsVs2UumP3Zp78oWczEXGjUfisl5kKj9lsBan0utGK/FeFzoRX7rQCfC63Zb0W4LlSyf9J2qNn+sH4CtgftHO05tBp68zt4ghUYR5IDvzxnZ8iK4MfOAAAAAElFTkSuQmCC"
-          />
-        </defs>
-      </svg>
+
       <svg
         width="24"
         height="24"
