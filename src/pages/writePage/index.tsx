@@ -3,7 +3,7 @@ import { useEffect, useRef } from 'react';
 import Main from './components/Main';
 
 const Wrapper = styled.div`
-  background-color: #c49f9f;
+  background-color: #5783fc;
   height: 100vh;
   width: 100vw;
   display: flex;

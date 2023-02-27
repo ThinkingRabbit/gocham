@@ -29,26 +29,45 @@ function Content({
   files,
   setFiles,
 }: ContentType) {
+  const [imageInsert, setImageInsert] = useState(false);
+
+  const [isInsertImage, setIsInsertImage] = useState(false);
+
   const onLoadFile = (e: any) => {
-    const fileArr = e.target.files;
-    // console.log(file);
-    // setFiles(file);
-    let fileURLs: any[] = [];
+    const regexp =
+      /^(?:(?:https?|ftp):\/\/)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:\/\S*)?$/;
+    if (files !== '') {
+      if (!regexp.test(files)) {
+        console.log('Please enter valid url.');
 
-    let file;
-    let filesLength = fileArr.length > 10 ? 10 : fileArr.length;
-
-    for (let i = 0; i < filesLength; i++) {
-      file = fileArr[i];
-
-      let reader = new FileReader();
-      reader.onload = () => {
-        // console.log(reader.result);
-        fileURLs[i] = reader.result;
-        setFiles(() => [...fileURLs]);
-      };
-      reader.readAsDataURL(file);
+        alert('Please enter valid url.');
+      } else {
+        // window.location.assign(files);
+        setImageInsert(false);
+        setIsInsertImage(true);
+      }
+    } else {
+      console.log('Please upload an image.');
+      alert('Please upload an image.');
     }
+    // 이미지 링크 작성하는 형식으로 변경
+    //
+    // const fileArr = e.target.files;
+    // // console.log(file);
+    // // setFiles(file);
+    // let fileURLs: any[] = [];
+    // let file;
+    // let filesLength = fileArr.length > 10 ? 10 : fileArr.length;
+    // for (let i = 0; i < filesLength; i++) {
+    //   file = fileArr[i];
+    //   let reader = new FileReader();
+    //   reader.onload = () => {
+    //     // console.log(reader.result);
+    //     fileURLs[i] = reader.result;
+    //     setFiles(() => [...fileURLs]);
+    //   };
+    //   reader.readAsDataURL(file);
+    // }
   };
 
   useEffect(() => {
@@ -86,7 +105,7 @@ function Content({
           </defs>
         </svg>
 
-        <label htmlFor="input-file">
+        {/* <label htmlFor="input-file">
           <img src={Album} alt="album" />
         </label>
         <input
@@ -95,14 +114,34 @@ function Content({
           id="input-file"
           onChange={onLoadFile}
           multiple
-        />
+        /> */}
+        <InsertBox>
+          <img
+            src={Album}
+            alt="album"
+            onClick={() => {
+              setImageInsert(!imageInsert);
+              setIsInsertImage(false);
+            }}
+          />
+          {imageInsert && (
+            <>
+              <InsertUrlInput
+                value={files}
+                onChange={e => setFiles(e.target.value)}
+                placeholder=" 이미지 URL을 입력해주세요"
+              />
+              <div style={{ cursor: 'pointer' }} onClick={onLoadFile}>
+                ✔️
+              </div>
+            </>
+          )}
+        </InsertBox>
       </Header>
 
-      {files.length !== 0 && (
-        <FunctionalBox style={{ height: '300px' }}>
-          <SlideBox>
-            {files && files.map((data: any) => <SildeImg src={data} alt="" />)}
-          </SlideBox>
+      {isInsertImage && (
+        <FunctionalBox style={{ height: '240px' }}>
+          <SlideBox>{files && <SildeImg src={files} alt="" />}</SlideBox>
         </FunctionalBox>
       )}
       <FunctionalBox>
@@ -125,15 +164,33 @@ function Content({
 
 export default Content;
 
+const InsertBox = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
+const InsertUrlInput = styled.input`
+  margin-left: 1rem;
+  margin-right: 0.4rem;
+  border: 1.5px solid #005666;
+  border-radius: 15px;
+  background-color: rgba(0, 0, 0, 0);
+  &:focus {
+    outline: none;
+  }
+  width: 12rem;
+`;
+
 const SlideBox = styled.div`
   display: flex;
   overflow-x: scroll;
-  height: 300px;
+  overflow-y: hidden;
+  height: 240px;
 `;
 
 const SildeImg = styled.img`
-  height: 300px;
-  width: 300px;
+  height: 240px;
+  width: 240px;
 `;
 
 const WritePageWrapper = styled(Wrapper)`

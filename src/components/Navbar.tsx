@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-expressions */
 import styled from '@emotion/styled';
 import plusImg from '../assets/images/icons/plus.png';
 import searchImg from '../assets/images/icons/search.png';
@@ -5,8 +6,8 @@ import userImg from '../assets/images/icons/user.png';
 import homeImg from '../assets/images/icons/home.png';
 import checkImg from '../assets/images/icons/checkImg.png';
 import trophyImg from '../assets/images/icons/trophy.png';
-import { Link, useLocation } from 'react-router-dom';
-import { useEffect } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import {
   newWriteContent,
   newWriteFiles,
@@ -62,6 +63,23 @@ function Navbar() {
   const [files, setFiles] = useRecoilState(newWriteFiles);
   const [inputData, setInputData] = useRecoilState(testData);
   const [idx, setIdx] = useRecoilState(lastIdx);
+  const navigation = useNavigate();
+  const isLogin = localStorage.getItem('userInfo');
+
+  const goMainButton = () => {
+    if (title !== '' && contents !== '') navigation(`/shorts/${idx}`);
+    else alert('내용을 채운 후 클릭해주세요!');
+  };
+
+  const pageHandler = (page: string) => {
+    if (page === 'write-page' || page === 'my-page') {
+      isLogin
+        ? navigation(`/${page}`)
+        : (window.alert('로그인이 필요한 서비스입니다'), navigation('/login'));
+    } else {
+      navigation(`/${page}`);
+    }
+  };
 
   useEffect(() => {
     location.pathname === '/write-page'
@@ -72,8 +90,7 @@ function Navbar() {
       const leftValue = leftButtonCustom ? leftButtonCustom : '찬성';
       const rightValue = rightButtonCustom ? rightButtonCustom : '반대';
       const saveData: SlideData = {
-        poster_path:
-          'https://user-images.githubusercontent.com/76567238/221376420-ee96140e-170c-4357-996b-9c7fcf9252e0.png',
+        poster_path: files,
         text: contents,
         posting_date: '2022-02-27',
         id: idx,
@@ -110,19 +127,25 @@ function Navbar() {
         </Menu>
         <Plus>
           {isWritePage ? (
-            <Link to={`/shorts/${idx}`}>
-              <img alt="img" src={checkImg} />
-            </Link>
+            <img src={checkImg} onClick={() => goMainButton()} alt="" />
           ) : (
-            <Link to="/write-page">
+            <Menu
+              onClick={() => {
+                pageHandler('write-page');
+              }}
+            >
               <img alt="img" src={plusImg} />
-            </Link>
+            </Menu>
           )}
         </Plus>
         <Menu>
           <img alt="" src={searchImg} />
         </Menu>
-        <Menu>
+        <Menu
+          onClick={() => {
+            pageHandler('my-page');
+          }}
+        >
           <img alt="" src={userImg} />
         </Menu>
       </MenuList>
