@@ -1,48 +1,71 @@
 import styled from '@emotion/styled';
+import { Navigate, useLocation, useNavigate } from 'react-router-dom';
+import { SlideData } from '../type';
 
 const IconBox = styled.div`
   display: flex;
   gap: 10px;
 `;
 
-const chatIcon = styled.div`
-  &:hover::before {
-    transform: translate(200px);
+const ChatIcon = styled.div`
+  &:hover {
+    transform: scale(1.1);
   }
+  cursor: pointer;
 `;
 
-function Icon() {
+function Icon(post: SlideData) {
+  const navigate = useNavigate();
+
+  const location = useLocation();
+
+  const postId: string = location.pathname.split('/')[2];
+
+  const url: string = `localhost:3000${location.pathname}`;
+
+  const pageHandler = () => {
+    navigate(`/detail-page/${postId}`, {
+      state: {
+        url: url,
+        image: post.poster_path,
+        voteCount: post.vote.vote_count,
+        description: post.text,
+      },
+    });
+  };
   return (
     <IconBox>
-      <svg
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        xmlnsXlink="http://www.w3.org/1999/xlink"
-      >
-        <rect width="23.4" height="24" fill="url(#pattern0)" />
-        <defs>
-          <pattern
-            id="pattern0"
-            patternContentUnits="objectBoundingBox"
-            width="1"
-            height="1"
-          >
-            <use
-              xlinkHref="#image0_2_51"
-              transform="matrix(0.0160256 0 0 0.015625 -0.0128205 0)"
+      <ChatIcon onClick={pageHandler}>
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          xmlnsXlink="http://www.w3.org/1999/xlink"
+        >
+          <rect width="23.4" height="24" fill="url(#pattern0)" />
+          <defs>
+            <pattern
+              id="pattern0"
+              patternContentUnits="objectBoundingBox"
+              width="1"
+              height="1"
+            >
+              <use
+                xlinkHref="#image0_2_51"
+                transform="matrix(0.0160256 0 0 0.015625 -0.0128205 0)"
+              />
+            </pattern>
+            <image
+              id="image0_2_51"
+              width="64"
+              height="64"
+              xlinkHref="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAQKADAAQAAAABAAAAQAAAAABGUUKwAAAFJklEQVR4AeWaS4gUVxSGnWgiBgmT+EJxpCUxj5W7gILKLJyNuNGFMeDS4CYLQUIEE3ARkAHRhYtAQlxocOFGA0mILgYfKIiBLIxJDGg7PohCQPFB4mOS/xu7hjOnb81UV1VPV1Uf+LvuPffWOec/devWrdvVM6398rZc9At9wgJhvjlSRu42cMccb6g8JFwRSiVzFe0m4WvhuvBfRmADW9jEdiGlR1FtEM4JI0JW0nHnYxsf+MJnx2WGItgiXBbigm6XHp/4JobUkjaLON0qfCLUhInksRrPCOeF2wL3O/d6dL+rODYvRHPEIulWCKuEV4WJpK7GQeEr4ZnQdqnJA8Mw7soyTM8Ku4XVwitCWuFcbGALm9iO80tMNaGt8oGs3xNCQTyR/hvhXaFdgm184CsUA7ERY+4yWxYPCiGnD6TfKywWpkrwhU98h2IiVmLORXj0XBJCjo5JPy8XL+mM4JsYQrERc+bH5msy8nPAwUPpmASLIsRCTD4RxA6HVDJLZ50WvNEL0i1LZbG9JxETsfl44QCXluRl9f5R8MZ+kC7LrN5SECk6Exsx+rjhAqfEwtLTGxmSruVMJvaYX0diJFYfP5wSSb96+ZNZxOQ2qyaKIlsnYiVmzwNuE8pMtf4h2BN/Vb13wrOK2UjMxG65wA2OscKKy57wXPX3Y3sXv4HY4WA5wTEo70j7r2A77w/2LJcSDpYTHOHaJIelsR3rqpfpvm8i1FDAoS5YbnAdJ7xx+WXl+nE9yl2Bi00AXOE8JrxA2A511XvGWstfgEtdsBxHX5peanD7sHGMDt82Okf1sh8hDicrY5zfkNa/Xr5ne1akDCc7AuAM92mbXcNFlBUVuNkkbOYWWOrInnD1KlU9t6UkYIljOOzqVap6bktIQJ9j6Du55lJXPbc+EtDVI4DLeV+wE0PqHRSMFVzgZrneZwSMuKBnuHqlqyTgqmO4zNWrVG263UMJeKtKjB2XRAnophFwgxFwzWWpmxIwHLoFqpyAAXexRy/+IintthHlN13HKlRjX4Yg971gn48HqsDYcfjCcfzOtvsdk0dqnGM7lLwcuyES8ZquwrBgR8GuqLECR3+Bm7bE4PiZYBPwl+ozaSi5JNoUheNC4algk/A5DSWXxNvi8PxSsAngibCOhpJKS3+MwJGt4t8Em4R7qgf/SJC+yNKr4Fr+awxCy4V/BJsEklKm12Tu+/OOA3z6hUTysXrZBFDmucnKseiS+e/xiOBxFXwSfpIu83c3kYM2HHP7QILYWAj5+YCE8BHzSqFowjtMbp/IROReV+GU4EfCE+m2R50KcNyqGHL/SCrixWLoiOCTQB19J2WenB8TQrFdkj6325W19J6Ao7+l64RM6YeSluA2VWy279jGKSh37FNZy80m4LZtaEOZWX21sFs4K4wI1r8tn1NbTWhJsm6BP0vgba36fCTcFW4Z3GyUITVfWNAAZTZpVgirhHEfMqjupS7FoDBln8vbrF/z0Zh6n8pHBds/z/Jl2d4iZL2IMtGaWBJ/Bk5l2H4qhB5L9tw0ZUYLQ32DwMTcEbGB/+4iYLijs32ylq/LHl95bhJye6zJ1qhkHT7RHMBw3ydsfGG26fcXaU4KPLcB93l0JEHMD4CnSnRkxTkkXBEKJfaKslTeKTwSrD4q8yrNixVbbpWRiNxkx0NizMxeOZmMOEvQNZVjbQjFJYCd1h1C1nnFuCpmMZQAnvesz7tCbAKYoQe6grUhSQIeC7sEXpW7TtgbrFWF9f8EQYupODhwTQAAAABJRU5ErkJggg=="
             />
-          </pattern>
-          <image
-            id="image0_2_51"
-            width="64"
-            height="64"
-            xlinkHref="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAQKADAAQAAAABAAAAQAAAAABGUUKwAAAFJklEQVR4AeWaS4gUVxSGnWgiBgmT+EJxpCUxj5W7gILKLJyNuNGFMeDS4CYLQUIEE3ARkAHRhYtAQlxocOFGA0mILgYfKIiBLIxJDGg7PohCQPFB4mOS/xu7hjOnb81UV1VPV1Uf+LvuPffWOec/devWrdvVM6398rZc9At9wgJhvjlSRu42cMccb6g8JFwRSiVzFe0m4WvhuvBfRmADW9jEdiGlR1FtEM4JI0JW0nHnYxsf+MJnx2WGItgiXBbigm6XHp/4JobUkjaLON0qfCLUhInksRrPCOeF2wL3O/d6dL+rODYvRHPEIulWCKuEV4WJpK7GQeEr4ZnQdqnJA8Mw7soyTM8Ku4XVwitCWuFcbGALm9iO80tMNaGt8oGs3xNCQTyR/hvhXaFdgm184CsUA7ERY+4yWxYPCiGnD6TfKywWpkrwhU98h2IiVmLORXj0XBJCjo5JPy8XL+mM4JsYQrERc+bH5msy8nPAwUPpmASLIsRCTD4RxA6HVDJLZ50WvNEL0i1LZbG9JxETsfl44QCXluRl9f5R8MZ+kC7LrN5SECk6Exsx+rjhAqfEwtLTGxmSruVMJvaYX0diJFYfP5wSSb96+ZNZxOQ2qyaKIlsnYiVmzwNuE8pMtf4h2BN/Vb13wrOK2UjMxG65wA2OscKKy57wXPX3Y3sXv4HY4WA5wTEo70j7r2A77w/2LJcSDpYTHOHaJIelsR3rqpfpvm8i1FDAoS5YbnAdJ7xx+WXl+nE9yl2Bi00AXOE8JrxA2A511XvGWstfgEtdsBxHX5peanD7sHGMDt82Okf1sh8hDicrY5zfkNa/Xr5ne1akDCc7AuAM92mbXcNFlBUVuNkkbOYWWOrInnD1KlU9t6UkYIljOOzqVap6bktIQJ9j6Du55lJXPbc+EtDVI4DLeV+wE0PqHRSMFVzgZrneZwSMuKBnuHqlqyTgqmO4zNWrVG263UMJeKtKjB2XRAnophFwgxFwzWWpmxIwHLoFqpyAAXexRy/+IintthHlN13HKlRjX4Yg971gn48HqsDYcfjCcfzOtvsdk0dqnGM7lLwcuyES8ZquwrBgR8GuqLECR3+Bm7bE4PiZYBPwl+ozaSi5JNoUheNC4algk/A5DSWXxNvi8PxSsAngibCOhpJKS3+MwJGt4t8Em4R7qgf/SJC+yNKr4Fr+awxCy4V/BJsEklKm12Tu+/OOA3z6hUTysXrZBFDmucnKseiS+e/xiOBxFXwSfpIu83c3kYM2HHP7QILYWAj5+YCE8BHzSqFowjtMbp/IROReV+GU4EfCE+m2R50KcNyqGHL/SCrixWLoiOCTQB19J2WenB8TQrFdkj6325W19J6Ao7+l64RM6YeSluA2VWy279jGKSh37FNZy80m4LZtaEOZWX21sFs4K4wI1r8tn1NbTWhJsm6BP0vgba36fCTcFW4Z3GyUITVfWNAAZTZpVgirhHEfMqjupS7FoDBln8vbrF/z0Zh6n8pHBds/z/Jl2d4iZL2IMtGaWBJ/Bk5l2H4qhB5L9tw0ZUYLQ32DwMTcEbGB/+4iYLijs32ylq/LHl95bhJye6zJ1qhkHT7RHMBw3ydsfGG26fcXaU4KPLcB93l0JEHMD4CnSnRkxTkkXBEKJfaKslTeKTwSrD4q8yrNixVbbpWRiNxkx0NizMxeOZmMOEvQNZVjbQjFJYCd1h1C1nnFuCpmMZQAnvesz7tCbAKYoQe6grUhSQIeC7sEXpW7TtgbrFWF9f8EQYupODhwTQAAAABJRU5ErkJggg=="
-          />
-        </defs>
-      </svg>
+          </defs>
+        </svg>
+      </ChatIcon>
 
       <svg
         width="24"
