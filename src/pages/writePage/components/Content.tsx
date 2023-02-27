@@ -139,7 +139,7 @@ function Content({
       </Header>
 
       {isInsertImage && (
-        <FunctionalBox style={{ height: '300px' }}>
+        <FunctionalBox style={{ height: '240px' }}>
           <SlideBox>{files && <SildeImg src={files} alt="" />}</SlideBox>
         </FunctionalBox>
       )}
@@ -184,12 +184,12 @@ const SlideBox = styled.div`
   display: flex;
   overflow-x: scroll;
   overflow-y: hidden;
-  height: 300px;
+  height: 240px;
 `;
 
 const SildeImg = styled.img`
-  height: 300px;
-  width: 300px;
+  height: 240px;
+  width: 240px;
 `;
 
 const WritePageWrapper = styled(Wrapper)`
