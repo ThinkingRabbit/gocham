@@ -6,26 +6,22 @@ const Container = styled.div`
   //flex-direction: column;
   //flex-wrap: wrap;
   justify-content: space-around;
-  border-radius: 40px;
+  border-radius: 30px;
 `;
 
 const Box = styled.div`
   position: relative;
-  width: 100%;
+  width: 95%;
   height: 100%;
-
-  border-radius: 10px;
+  top: 2px;
+  border-radius: 50px;
   background: linear-gradient(135deg, #6e8efb, #a777e3);
 `;
 
 const Button = styled.div`
   position: relative;
-
-  top: 3px;
-  left: -7px;
-  width: 44%;
-  height: 28px;
-  margin: 0;
+  width: 100%;
+  height: 45px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -81,8 +77,8 @@ const Button = styled.div`
     position: absolute;
     top: -7px;
     left: -4px;
-    width: 100%;
-    height: 100%;
+    width: 105%;
+    height: 120%;
     display: flex;
     justify-content: center;
     align-items: center;
