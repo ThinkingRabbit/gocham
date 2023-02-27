@@ -86,6 +86,7 @@ function Navbar() {
           vote_count: 0,
           vote_case_left: 0,
           vote_case_right: 0,
+          vote_click: false,
         },
         like: 0,
       };
