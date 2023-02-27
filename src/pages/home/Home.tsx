@@ -9,7 +9,7 @@ import Main from './components/Main';
 import RandomGenerator from './utils/random';
 
 const Wrapper = styled.div`
-  background-color: #c49f9f;
+  background-color: #5783fc;
   height: 100vh;
   /* width: 100vw; */
   display: flex;
