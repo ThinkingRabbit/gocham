@@ -5,11 +5,12 @@ interface Comments {
   case: boolean;
 }
 
-interface Vote {
+export interface Vote {
   vote_text: string[];
   vote_count: number;
   vote_case_left: number;
   vote_case_right: number;
+  vote_click: boolean;
 }
 
 export interface SlideData {

@@ -1,15 +1,17 @@
 import styled from '@emotion/styled';
-import { useEffect, useRef, useState } from 'react';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+
+import { useEffect, useRef } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import { testData } from '../../states/testData';
+
 import Main from './components/Main';
 import RandomGenerator from './utils/random';
 
 const Wrapper = styled.div`
-  background-color: #c49f9f;
+  background-color: #5783fc;
   height: 100vh;
-  width: 100vw;
+  /* width: 100vw; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -24,6 +26,7 @@ function Home() {
   const [inputData, setInputData] = useRecoilState(testData);
   useEffect(() => {
     dataIds.current = RandomGenerator.run(inputData);
+
     if (!id) {
       return navigate(`/shorts/${dataIds.current[0]}`);
     }

@@ -16,19 +16,16 @@ import {
   newWritLeftButtonCustom,
 } from '../states/newWriteState';
 import { useRecoilState } from 'recoil';
-import { updateData } from '../data/testData';
 import { lastIdx, testData } from '../states/testData';
-import { Data, SlideData } from '../pages/home/type';
+import { SlideData } from '../pages/home/type';
 
-const NavigationBar = styled.div`
-  margin: 0 10px 0 10px;
-`;
+const NavigationBar = styled.div``;
 
 const MenuList = styled.ul`
+  padding: 0 5px 0 15px;
   display: flex;
   background-color: #ededed;
-  justify-content: space-between;
-  align-items: flex-end;
+  gap: 70px;
   flex-direction: row;
   height: 100%;
 `;
@@ -36,20 +33,19 @@ const MenuList = styled.ul`
 const Menu = styled.li`
   margin: auto 0;
   cursor: pointer;
-  padding: 0 25px 0 25px;
-  width: 40px;
+
+  width: 5px;
   height: 38px;
 `;
 
 const Plus = styled.li`
   position: relative;
-  margin: auto 0;
-  width: 69px;
+  width: 0px;
   height: 69px;
   z-index: 10;
   transform: translateY(-20px);
   cursor: pointer;
-  padding: 0 20px 0 20px;
+  padding: 0 35px 0 1px;
 `;
 
 function Navbar() {
@@ -90,6 +86,7 @@ function Navbar() {
           vote_count: 0,
           vote_case_left: 0,
           vote_case_right: 0,
+          vote_click: false,
         },
         like: 0,
       };
@@ -117,10 +114,10 @@ function Navbar() {
         </Menu>
         <Plus>
           {isWritePage ? (
-            <img src={checkImg} onClick={() => goMainButton()} />
+            <img src={checkImg} onClick={() => goMainButton()} alt="" />
           ) : (
             <Link to="/write-page">
-              <img src={plusImg} />
+              <img alt="img" src={plusImg} />
             </Link>
           )}
         </Plus>

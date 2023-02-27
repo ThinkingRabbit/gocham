@@ -1,13 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { MdArrowBackIos } from 'react-icons/md';
 import { RxHamburgerMenu } from 'react-icons/rx';
 import { FaRegThumbsUp } from 'react-icons/fa';
 import { RiSendPlaneLine } from 'react-icons/ri';
-import { CommentType } from './type/comment.type';
-import Carousel from './components/Carousel/Carousel';
-import Comment from './components/Comment/Comment';
 
 const Index = () => {
   const navigate = useNavigate();
@@ -18,7 +15,40 @@ const Index = () => {
 
   const [isCopied, setisCopied] = useState<boolean>(false);
 
+  const [comment, setComment] = useState<string>('');
+
+  const [comments, setComments] = useState<string[]>([]);
+
   const { url, image, voteCount, description } = location.state;
+
+  const postId: string = location.pathname.split('/')[2];
+
+  const canSubmit: boolean = comment.length > 0;
+
+  const isLogin = localStorage.getItem('isLogin');
+
+  const storageComments = localStorage.getItem('comments');
+
+  const parsedCurPageComments: string[] =
+    storageComments !== null && JSON.parse(storageComments)[postId];
+
+  const parsedStorageComments =
+    storageComments !== null && JSON.parse(storageComments);
+
+  useEffect(() => {
+    if (!parsedCurPageComments) {
+      return localStorage.setItem(
+        'comments',
+        JSON.stringify({ ...parsedStorageComments, [postId]: [] })
+      );
+    }
+
+    setComments([...parsedCurPageComments]);
+  }, []);
+
+  const pageHandler = () => {
+    navigate('/');
+  };
 
   const handleLikeClick = () => {
     setisLiked(true);
@@ -37,22 +67,46 @@ const Index = () => {
     navigator.clipboard.writeText(url);
   };
 
-  const pageHandler = () => {
-    navigate('/');
+  const commentHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setComment(e.target.value);
   };
 
-  const comment: CommentType = {
-    id: 1,
-    name: '디아',
-    profile: '',
-    comment:
-      '내용이 작성됩니다.내용이 작성됩니다.내용이 작성됩니다.내용이 작성됩니다.내용이 작성됩니다.내용이 작성됩니다.',
-    selected: '신발을 산다',
-    isBlue: true,
-    like: {
-      isLiked: false,
-      likeCount: 1234,
-    },
+  const commentsHandler = () => {
+    setComments([...comments, comment]);
+  };
+
+  const clearInputHandler = () => {
+    setComment('');
+  };
+
+  const submitComment = () => {
+    if (!isLogin) {
+      window.alert('로그인이 필요한 서비스입니다');
+      navigate('/login');
+    }
+
+    if (!canSubmit) {
+      return window.alert('댓글을 입력해주세요');
+    }
+
+    localStorage.setItem(
+      'comments',
+      JSON.stringify({
+        ...parsedStorageComments,
+        [postId]: [...comments, comment],
+      })
+    );
+
+    commentsHandler();
+
+    clearInputHandler();
+  };
+
+  const onKeyPressHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      submitComment();
+    }
   };
 
   return (
@@ -63,7 +117,7 @@ const Index = () => {
           <StMenuIcon />
         </StHeader>
         <StBody>
-          <Carousel image={image} />
+          <StImage src={image} alt="이미지" />
           <StSocial>
             <StIconBox>
               <StLike isLiked={isLiked} onClick={likeHandler} />
@@ -72,9 +126,17 @@ const Index = () => {
             <StParcitipation>투표 참여 : {voteCount}</StParcitipation>
           </StSocial>
           <StInfo>{description}</StInfo>
+          {comments.map((cur, idx) => (
+            <StComment key={idx}>{cur}</StComment>
+          ))}
         </StBody>
         <StFooter>
-          <Comment {...comment} />
+          <StInput
+            value={comment}
+            onKeyPress={onKeyPressHandler}
+            onChange={commentHandler}
+          />
+          <StSubmitBtn onClick={submitComment}>등록</StSubmitBtn>
         </StFooter>
       </StDetail>
     </StWrapper>
@@ -82,19 +144,25 @@ const Index = () => {
 };
 
 const StWrapper = styled.div`
-  width: 100%;
-  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #c49f9f;
+  width: 100%;
+  height: 100vh;
+  background: #5783fc;
 `;
 
 const StDetail = styled.div`
+  padding-bottom: 51px;
   position: relative;
-  width: 470px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin: 0 auto;
+  width: 400px;
   height: 790px;
   background: white;
+  overflow: scroll;
 `;
 
 const StHeader = styled.div`
@@ -108,7 +176,7 @@ const StHeader = styled.div`
 `;
 
 const StBackIcon = styled(MdArrowBackIos)`
-  margin-top: 50px;
+  margin-top: 20px;
   margin-left: 15px;
   color: white;
   font-size: 30px;
@@ -116,7 +184,7 @@ const StBackIcon = styled(MdArrowBackIos)`
 `;
 
 const StMenuIcon = styled(RxHamburgerMenu)`
-  margin-top: 50px;
+  margin-top: 20px;
   margin-right: 15px;
   color: white;
   font-size: 30px;
@@ -127,13 +195,17 @@ const StBody = styled.div`
   width: 100%;
 `;
 
+const StImage = styled.img`
+  display: inline-block;
+  width: 100%;
+`;
+
 const StSocial = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 10px;
+  padding: 15px;
   width: 100%;
-  height: 50px;
   box-sizing: border-box;
 `;
 
@@ -148,14 +220,14 @@ const StLike = styled(FaRegThumbsUp)<{ isLiked: boolean }>`
   margin-right: 10px;
   width: 24px;
   height: 24px;
-  color: ${({ isLiked }) => (isLiked ? 'blue' : 'black')};
+  color: ${({ isLiked }) => (isLiked ? '#5783fc;' : 'black')};
   cursor: pointer;
 `;
 
 const StShare = styled(RiSendPlaneLine)<{ isCopied: boolean }>`
   width: 26px;
   height: 26px;
-  color: ${({ isCopied }) => (isCopied ? 'blue' : 'black')};
+  color: ${({ isCopied }) => (isCopied ? '#5783fc;' : 'black')};
   cursor: pointer;
 `;
 
@@ -165,14 +237,50 @@ const StParcitipation = styled.p`
 `;
 
 const StInfo = styled.div`
+  margin-bottom: 10px;
   padding: 10px;
   width: 100%;
   border-top: 1px solid #ccc;
-  box-sizing: border-box;
+  border-bottom: 1px solid #ccc;
+`;
+
+const StComment = styled.div`
+  margin: 0 auto;
+  margin-bottom: 10px;
+  width: 95%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 `;
 
 const StFooter = styled.div`
-  width: 100%;
+  position: fixed;
+  bottom: 0;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 400px;
+  background: white;
+  border-top: 1px solid #ccc;
+`;
+
+const StInput = styled.input`
+  width: 80%;
+  height: 30px;
+  border: none;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+`;
+
+const StSubmitBtn = styled.button`
+  width: 18%;
+  height: 30px;
+  border: none;
+  border: 1px solid #5783fc;
+  color: white;
+  background: #5783fc;
+  border-radius: 5px;
 `;
 
 export default Index;

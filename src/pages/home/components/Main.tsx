@@ -8,16 +8,16 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-  width: 470px;
-  height: 88vh;
+  width: 400px;
+  height: 790px;
 `;
 
 function Main() {
   return (
     <Wrapper>
-      <Headers></Headers>
-      <Slide></Slide>
-      <Navbar></Navbar>
+      <Headers />
+      <Slide />
+      <Navbar />
     </Wrapper>
   );
 }
