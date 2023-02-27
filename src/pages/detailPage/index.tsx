@@ -25,6 +25,8 @@ const Index = () => {
 
   const canSubmit: boolean = comment.length > 0;
 
+  const isLogin = localStorage.getItem('isLogin');
+
   const storageComments = localStorage.getItem('comments');
 
   const parsedCurPageComments: string[] =
@@ -78,6 +80,11 @@ const Index = () => {
   };
 
   const submitComment = () => {
+    if (!isLogin) {
+      window.alert('로그인이 필요한 서비스입니다');
+      navigate('/login');
+    }
+
     if (!canSubmit) {
       return window.alert('댓글을 입력해주세요');
     }
@@ -137,20 +144,25 @@ const Index = () => {
 };
 
 const StWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   height: 100vh;
   background: #5783fc;
 `;
 
 const StDetail = styled.div`
+  padding-bottom: 51px;
   position: relative;
   display: flex;
   align-items: center;
   flex-direction: column;
   margin: 0 auto;
-  max-width: 400px;
-  height: 100vh;
+  width: 400px;
+  height: 790px;
   background: white;
+  overflow: scroll;
 `;
 
 const StHeader = styled.div`
@@ -242,13 +254,14 @@ const StComment = styled.div`
 `;
 
 const StFooter = styled.div`
-  position: absolute;
+  position: fixed;
   bottom: 0;
   padding: 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
+  width: 400px;
+  background: white;
   border-top: 1px solid #ccc;
 `;
 

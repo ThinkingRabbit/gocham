@@ -94,6 +94,9 @@ const Login = () => {
 };
 
 const StWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   height: 100vh;
   background: #5783fc;
@@ -105,10 +108,9 @@ const StLogin = styled.div`
   align-items: center;
   flex-direction: column;
   margin: 0 auto;
-  max-width: 400px;
-  height: 100vh;
+  width: 400px;
+  height: 790px;
   background: white;
-  border: 1px solid black;
 `;
 
 const StHeader = styled.p`
