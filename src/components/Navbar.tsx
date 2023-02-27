@@ -6,7 +6,7 @@ import homeImg from '../assets/images/icons/home.png';
 import checkImg from '../assets/images/icons/checkImg.png';
 import trophyImg from '../assets/images/icons/trophy.png';
 import { Link, useLocation } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import {
   newWriteContent,
   newWriteFiles,
@@ -16,9 +16,8 @@ import {
   newWritLeftButtonCustom,
 } from '../states/newWriteState';
 import { useRecoilState } from 'recoil';
-import { updateData } from '../data/testData';
 import { lastIdx, testData } from '../states/testData';
-import { Data, SlideData } from '../pages/home/type';
+import { SlideData } from '../pages/home/type';
 
 const NavigationBar = styled.div`
   margin: 0 10px 0 10px;
@@ -115,11 +114,11 @@ function Navbar() {
         <Plus>
           {isWritePage ? (
             <Link to={`/shorts/${idx}`}>
-              <img src={checkImg} />
+              <img alt="img" src={checkImg} />
             </Link>
           ) : (
             <Link to="/write-page">
-              <img src={plusImg} />
+              <img alt="img" src={plusImg} />
             </Link>
           )}
         </Plus>
